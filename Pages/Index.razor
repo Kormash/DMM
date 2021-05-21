@@ -1,0 +1,31 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<IdentityUser> UserManager;
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<p>
+    @userAuthenticated
+</p>
+
+@code{
+    string userAuthenticated;
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            var currentUser = await UserManager.GetUserAsync(user);
+            userAuthenticated = $"{ currentUser.Id} ";
+        }
+        else
+        {
+            userAuthenticated = "The user is NOT authenticated.";
+        }
+    }
+}
