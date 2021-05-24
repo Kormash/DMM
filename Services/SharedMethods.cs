@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace DMM.Services
 {
@@ -17,7 +18,7 @@ namespace DMM.Services
             var user = authState.User;
             if (!user.Identity.IsAuthenticated)
             {
-                NavigationManager.NavigateTo("/Identity/Account/Login");
+                NavigationManager.NavigateTo("/identity/account/login");
             }
         }
         public string ConvertImageToDisplay(byte[] Image)

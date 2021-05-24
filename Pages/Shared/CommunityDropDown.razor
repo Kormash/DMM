@@ -1,0 +1,20 @@
+﻿@using Blazority
+
+<AuthorizeView>
+        <Authorized>
+            <div class="dropdown">
+                <button class="dropbtn">Community</button>
+                <div class="dropdown-content">
+                    <a href="/campaigns">Commnuity Campaigns</a>
+                </div>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="dropdown">
+                <button class="dropbtn">Community</button>
+                <div class="dropdown-content">
+                    <a href="/campaigns">Commnuity Campaigns</a>
+                </div>
+            </div>
+        </NotAuthorized>
+</AuthorizeView>

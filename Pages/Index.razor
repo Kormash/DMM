@@ -21,7 +21,7 @@ Welcome to your new app.
         if (user.Identity.IsAuthenticated)
         {
             var currentUser = await UserManager.GetUserAsync(user);
-            userAuthenticated = $"{ currentUser.Id} ";
+            //userAuthenticated = $"{ currentUser.Id} ";
         }
         else
         {

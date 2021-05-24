@@ -1,0 +1,33 @@
+﻿@page "/campaigns"
+@using Blazority
+
+<body>
+    <div div style="width:100%;height:60px;border-bottom: 2px solid darkred;">
+        <div style="float:right;">
+            <Button>Button</Button>
+        </div>
+    </div>
+
+    <div style="padding-top:12px;">
+        @foreach (var c in AllCampaignsList)
+        {
+            <div class="CampaignDivSize hoverOutline" style="text-align:center;">
+                <div>
+                    @if (c.Image == null)
+                    {
+                        <img class="imageSize" src="/images/d20Red.webp" alt="d20Red" asp-append-version="true" />
+                    }
+                    else
+                    {
+                        string img = SharedMethods.ConvertImageToDisplay(c.Image);
+                        <img class="imageSize" src="@img" alt="d20Red" asp-append-version="true" />
+                    }
+                </div>
+                <div style="margin-top:6px;">
+                    <b style="color:black;">@c.Name</b>
+                </div>
+            </div>
+        }
+    </div>
+
+</body>

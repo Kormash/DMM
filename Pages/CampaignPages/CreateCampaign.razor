@@ -5,12 +5,16 @@
 <br />
 <Button @onclick="()=>NavigateToMyCampaigns()">My Campaigns</Button>
 <Form Model="@textAreaModel">
-<Textarea Label="Campaign Title" @bind-Value="textAreaModel.InputName" style="resize:none;" />
-<br />
-<Textarea Label="Campaign Description" @bind-Value="textAreaModel.InputDescription" style="resize:none;" />
-</Form>
-<Form Model="@textAreaModel">
+    <Textarea Label="Campaign Title" @bind-Value="textAreaModel.InputName" style="resize:none;" />
+    <br />
+    <Textarea Label="Campaign Description" @bind-Value="textAreaModel.InputDescription" style="resize:none;" />
+    <br />
     <BlazorInputFile.InputFile OnChange="HandleFileSelected" multiple />
+    <br />
+    <CheckboxContainer>
+        <Checkbox Label="Public" @bind-Value="@textAreaModel.IsPublic"></Checkbox>
+    </CheckboxContainer>
+
 </Form>
 <br />
 <Button OnClick="()=>SubmitCampaign()">Create Campaign</Button>

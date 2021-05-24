@@ -25,6 +25,20 @@ namespace DMM.Services
 
             return AllCampaigns.ToList();
         }
+        public async Task<List<Campaign>> GetAllPublicCampaigns()
+        {
+            await using var context = dbContextFactory.CreateDbContext();
+            var AllCampaigns = await context.Campaigns.Where(x=> x.IsPublic == true).ToListAsync();
+
+            return AllCampaigns.ToList();
+        }
+        public async Task<List<Campaign>> GetCampaignsByUserId(string UserId)
+        {
+            await using var context = dbContextFactory.CreateDbContext();
+            var MyCampaigns = await context.Campaigns.Where(x => x.UserId == UserId).ToListAsync();
+
+            return MyCampaigns.ToList();
+        }
         public async Task UpdateMyCampaign(Campaign p)
         {
             await using var context = dbContextFactory.CreateDbContext();
