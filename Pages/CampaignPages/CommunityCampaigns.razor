@@ -11,7 +11,7 @@
     <div style="padding-top:12px;">
         @foreach (var c in AllCampaignsList)
         {
-            <div class="CampaignDivSize hoverOutline" style="text-align:center;">
+            <div class="CampaignDivSize hoverOutline" style="text-align:center;"  @onclick="() => NavigateToCampaignView(c.Id)">
                 <div>
                     @if (c.Image == null)
                     {

@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Syncfusion.Blazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,7 @@ namespace DMM
             services.AddDbContextFactory<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ApplicationDbContext>(p => p.GetRequiredService<IDbContextFactory<ApplicationDbContext>>().CreateDbContext());
 
+            services.AddSyncfusionBlazor();
 
             services.AddScoped<CampaignService>();
 
@@ -78,6 +80,8 @@ namespace DMM
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDUxNjM5QDMxMzkyZTMxMmUzMFY2eWY2WnpkRVZWT0kwMTB2bm9mT0pOK0laRWt4eFYwbzBTMzVPakxvV3M9");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

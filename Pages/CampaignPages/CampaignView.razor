@@ -1,0 +1,42 @@
+﻿@page "/campaign/{CampaignId:int}"
+@using Blazority
+@using Syncfusion.Blazor 
+
+<body>
+    <div style="width:100%;height:100px;border-bottom: 2px solid darkred;">
+
+        <div style="height:100%; float:left">
+            @if (Campaign.Image == null)
+            {
+                <img style="height:100%" src="/images/d20Red.webp" alt="d20Red" asp-append-version="true" />
+            }
+            else
+            {
+                string img = SharedMethods.ConvertImageToDisplay(Campaign.Image);
+                <img style="height:100%" src="@img" alt="d20Red" asp-append-version="true" />
+            }
+        </div>
+        <div>
+            <h1>@Campaign.Name</h1>
+        </div>
+        <div style="float:right">
+            <Button>CLICK ME</Button>
+        </div>
+
+    </div>
+
+    @if (CanEdit)
+    {
+        <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="@Model.Description" SaveInterval="1"></Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
+        <Button @onclick="() => SaveCampaign()">SAVE</Button>
+    }
+    else
+    {
+        @convertedMarkdown
+    }
+
+
+
+
+
+</body>

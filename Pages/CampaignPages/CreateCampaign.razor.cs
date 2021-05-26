@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using BlazorInputFile;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace DMM.Pages.CampaignPages
 {
     public partial class CreateCampaign : ComponentBase
@@ -36,6 +37,7 @@ namespace DMM.Pages.CampaignPages
         //UserVariables
         private string UserId { get; set; }
 
+
         protected override async Task OnInitializedAsync()
         {
             await SharedMethods.CheckIfLoggedIn(AuthenticationStateProvider, NavigationManager);
@@ -52,6 +54,8 @@ namespace DMM.Pages.CampaignPages
                 NavigationManager.NavigateTo("/identity/account/login");
                 UserId = "";
             }
+
+            
 
         }
 

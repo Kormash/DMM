@@ -2,12 +2,16 @@
 @using Blazority
 @using System.IO
 
+<%@Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %/>
+
 <br />
 <Button @onclick="()=>NavigateToMyCampaigns()">My Campaigns</Button>
 <Form Model="@textAreaModel">
     <Textarea Label="Campaign Title" @bind-Value="textAreaModel.InputName" style="resize:none;" />
     <br />
-    <Textarea Label="Campaign Description" @bind-Value="textAreaModel.InputDescription" style="resize:none;" />
+    <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="textAreaModel.InputDescription">
+        
+    </Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
     <br />
     <BlazorInputFile.InputFile OnChange="HandleFileSelected" multiple />
     <br />
@@ -15,6 +19,8 @@
         <Checkbox Label="Public" @bind-Value="@textAreaModel.IsPublic"></Checkbox>
     </CheckboxContainer>
 
+
 </Form>
+
 <br />
 <Button OnClick="()=>SubmitCampaign()">Create Campaign</Button>

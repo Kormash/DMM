@@ -39,6 +39,14 @@ namespace DMM.Services
 
             return MyCampaigns.ToList();
         }
+        public async Task<Campaign> GetCampaignByID(int Id)
+        {
+            using var context = dbContextFactory.CreateDbContext();
+            var dbSet = context.Set<Campaign>();
+
+            return await dbSet.FindAsync(Id);
+        }
+        
         public async Task UpdateMyCampaign(Campaign p)
         {
             await using var context = dbContextFactory.CreateDbContext();

@@ -504,3 +504,10 @@ C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\Shared\_LoginPartial
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\_ViewImports.cshtml.g.cs
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\_ViewStart.cshtml.g.cs
+C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\CampaignPages\CampaignView.razor.g.cs
+C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\CampaignPages\CampaignView.razor.g.cs
+C:\Users\Erik\source\repos\DMM\bin\Debug\net5.0\Syncfusion.Blazor.dll
+C:\Users\Erik\source\repos\DMM\bin\Debug\net5.0\Syncfusion.ExcelExport.Net.dll
+C:\Users\Erik\source\repos\DMM\bin\Debug\net5.0\Syncfusion.Licensing.dll
+C:\Users\Erik\source\repos\DMM\bin\Debug\net5.0\Syncfusion.PdfExport.Net.dll
+C:\Users\Erik\source\repos\DMM\bin\Debug\net5.0\Markdig.dll

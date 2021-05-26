@@ -44,5 +44,10 @@ namespace DMM.Pages.CampaignPages
         {
             NavigationManager.NavigateTo("/mycampaigns/createcampaign");
         }
+
+        public void NavigateToCampaignView(int CampaignId)
+        {
+            NavigationManager.NavigateTo($"/campaign/{CampaignId}");
+        }
     }
 }
