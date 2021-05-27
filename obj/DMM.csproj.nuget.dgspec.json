@@ -101,6 +101,10 @@
             "Syncfusion.Blazor": {
               "target": "Package",
               "version": "[19.1.0.65, )"
+            },
+            "System.Net.Http.Json": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

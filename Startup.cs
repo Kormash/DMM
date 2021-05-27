@@ -55,6 +55,8 @@ namespace DMM
             services.AddSyncfusionBlazor();
 
             services.AddScoped<CampaignService>();
+            services.AddScoped<MonsterService>();
+            services.AddScoped<MonsterTemplateService>();
 
             services.AddScoped<ActionTemplate>();
             services.AddScoped<Area>();

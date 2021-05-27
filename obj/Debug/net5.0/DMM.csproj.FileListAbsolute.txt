@@ -511,3 +511,7 @@ C:\Users\Erik\source\repos\DMM\bin\Debug\net5.0\Syncfusion.ExcelExport.Net.dll
 C:\Users\Erik\source\repos\DMM\bin\Debug\net5.0\Syncfusion.Licensing.dll
 C:\Users\Erik\source\repos\DMM\bin\Debug\net5.0\Syncfusion.PdfExport.Net.dll
 C:\Users\Erik\source\repos\DMM\bin\Debug\net5.0\Markdig.dll
+C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\MonsterPages\MonsterTemplates.razor.g.cs
+C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\MonsterPages\MyMonsters.razor.g.cs
+C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\MonsterPages\MonsterTemplates.razor.g.cs
+C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\MonsterPages\MyMonsters.razor.g.cs
