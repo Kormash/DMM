@@ -4,7 +4,7 @@
 #pragma warning disable 0649
 #pragma warning disable 0169
 
-namespace DMM.Pages
+namespace DMM.Pages.MonsterPages
 {
     #line hidden
     using System;
@@ -22,6 +22,13 @@ using System.Net.Http;
 #nullable restore
 #line 2 "C:\Users\Erik\source\repos\DMM\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\Erik\source\repos\DMM\_Imports.razor"
+using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
@@ -90,51 +97,20 @@ using Syncfusion.Blazor;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\Erik\source\repos\DMM\Pages\Index.razor"
-using Microsoft.AspNetCore.Components.Authorization;
+#line 2 "C:\Users\Erik\source\repos\DMM\Pages\MonsterPages\MonsterTemplates - Copy.razor"
+using Blazority;
 
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 5 "C:\Users\Erik\source\repos\DMM\Pages\Index.razor"
-using Microsoft.AspNetCore.Identity;
-
-#line default
-#line hidden
-#nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/")]
-    public partial class Index : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.RouteAttribute("/monsters")]
+    public partial class MonsterTemplates___Copy : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
         #pragma warning restore 1998
-#nullable restore
-#line 15 "C:\Users\Erik\source\repos\DMM\Pages\Index.razor"
-      
-    string userAuthenticated;
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        if (user.Identity.IsAuthenticated)
-        {
-            var currentUser = await UserManager.GetUserAsync(user);
-            //userAuthenticated = $"{ currentUser.Id} ";
-        }
-        else
-        {
-            userAuthenticated = "The user is NOT authenticated.";
-        }
-    }
-
-#line default
-#line hidden
-#nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private UserManager<IdentityUser> UserManager { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     }
 }
 #pragma warning restore 1591

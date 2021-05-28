@@ -33,6 +33,7 @@ namespace DMM.Pages.MonsterPages
 
         //Variables
         public string Output = "Hello World!";
+        public string monsterName = "";
 
         public List<MonsterItem> MonsterList = new();
         //UserVariables
@@ -94,7 +95,9 @@ namespace DMM.Pages.MonsterPages
 
                     monsterItem.index = Regex.Replace(monsterString[1], "\"", "");
                     monsterItem.name = Regex.Replace(monsterString[3], "\"", "");
-                    monsterItem.url = Regex.Replace(monsterString[5], "\"", "");
+                    string url = Regex.Replace(monsterString[5], "\"", "");
+                    monsterItem.url = Regex.Replace(url, "/api", "");
+                    monsterItem.apiResponse = "";
 
                     MonsterList.Add(monsterItem);
                     
@@ -104,9 +107,36 @@ namespace DMM.Pages.MonsterPages
 
         }
 
-        public void NavigateToMonster(string url)
+        public async Task MonsterDetails(MonsterItem monster)
         {
+            if(monster.apiResponse == "" || monster.apiResponse == null)
+            {
+                try
+                {
+                    string address = "https://www.dnd5eapi.co/api/" + monster.url;
+                    HttpResponseMessage response = await Http.GetAsync(address);
+                    response.EnsureSuccessStatusCode();
+                    monster.apiResponse = await response.Content.ReadAsStringAsync();
+                    // Above three lines can be replaced with new helper method below
+                    // string responseBody = await client.GetStringAsync(uri);
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine("\nException Caught!");
+                    Console.WriteLine("Message :{0} ", e.Message);
+                }
+            }
 
+            monster.apiResponse = GetMonsterName(monster.apiResponse);
+            
+
+            monster.hidden = !monster.hidden;
+        }
+
+        public string GetMonsterName(string apiResponse)
+        {
+            return Regex.Match(apiResponse, "name\":\"\"").Value;
+            //return "Larry";
         }
 
     }
@@ -116,5 +146,7 @@ namespace DMM.Pages.MonsterPages
         public string index { get; set; }
         public string name { get; set; }
         public string url { get; set; }
+        public string apiResponse { get; set; }
+        public bool hidden = true;
     }
 }
