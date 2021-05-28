@@ -135,8 +135,11 @@ namespace DMM.Pages.MonsterPages
 
         public string GetMonsterName(string apiResponse)
         {
-            return Regex.Match(apiResponse, "name\":\"\"").Value;
-            //return "Larry";
+            string name = Regex.Match(apiResponse, "name\":\".+?\"").Value;
+
+            name = Regex.Replace(name, "\"", "");
+            name = Regex.Replace(name, "name:", "");
+            return name;
         }
 
     }
