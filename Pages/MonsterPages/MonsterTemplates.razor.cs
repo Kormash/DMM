@@ -13,6 +13,7 @@ using DMM.Models.Entities;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 
 namespace DMM.Pages.MonsterPages
 {
@@ -32,13 +33,13 @@ namespace DMM.Pages.MonsterPages
 
         //Variables
         public string Output = "Hello World!";
+
+        public List<MonsterItem> MonsterList = new();
         //UserVariables
         private string UserId { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            await SharedMethods.CheckIfLoggedIn(AuthenticationStateProvider, NavigationManager);
-
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
             if (user.Identity.IsAuthenticated)
@@ -48,13 +49,20 @@ namespace DMM.Pages.MonsterPages
             }
             else
             {
-                NavigationManager.NavigateTo("/identity/account/login");
                 UserId = "";
             }
+            
+            await MonsterAPICall();
+            FormatMonsterList();
+            
 
+        }
+
+        public async Task MonsterAPICall()
+        {
             try
             {
-                HttpResponseMessage response = await Http.GetAsync("https://www.dnd5eapi.co/api/spells/");
+                HttpResponseMessage response = await Http.GetAsync("https://www.dnd5eapi.co/api/monsters");
                 response.EnsureSuccessStatusCode();
                 Output = await response.Content.ReadAsStringAsync();
                 // Above three lines can be replaced with new helper method below
@@ -65,8 +73,48 @@ namespace DMM.Pages.MonsterPages
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", e.Message);
             }
+        }
+
+        public void FormatMonsterList()
+        {
+            Output = Regex.Match(Output, @"\[[^\]]*").Value;
+            Output = Regex.Replace(Output, "\\[", "");
+            
+            char[] sperators = new char[] { '{', '}' };
+            String[] MonsterStrings = Output.Split(sperators, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string monster in MonsterStrings)
+            {
+                if (!monster.Equals(","))
+                {
+                    char[] sperator = new char[] { ',', ':' };
+                    String[] monsterString = monster.Split(sperator, StringSplitOptions.RemoveEmptyEntries);
+
+                    MonsterItem monsterItem = new();
+
+                    monsterItem.index = Regex.Replace(monsterString[1], "\"", "");
+                    monsterItem.name = Regex.Replace(monsterString[3], "\"", "");
+                    monsterItem.url = Regex.Replace(monsterString[5], "\"", "");
+
+                    MonsterList.Add(monsterItem);
+                    
+                }
+
+            }
 
         }
 
+        public void NavigateToMonster(string url)
+        {
+
+        }
+
+    }
+
+    public class MonsterItem
+    {
+        public string index { get; set; }
+        public string name { get; set; }
+        public string url { get; set; }
     }
 }

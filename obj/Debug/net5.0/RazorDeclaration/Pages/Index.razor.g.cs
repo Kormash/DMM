@@ -112,7 +112,7 @@ using Microsoft.AspNetCore.Identity;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 15 "C:\Users\Erik\source\repos\DMM\Pages\Index.razor"
+#line 17 "C:\Users\Erik\source\repos\DMM\Pages\Index.razor"
       
     string userAuthenticated;
     protected override async Task OnInitializedAsync()

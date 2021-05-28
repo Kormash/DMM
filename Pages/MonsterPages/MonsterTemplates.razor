@@ -9,7 +9,15 @@
     </div>
 
     <div style="padding-top:12px;">
-       @Output
+
+        @foreach(var m in MonsterList)
+        {
+        <div class="MonsterDivSize hoverOutline" style="text-align:center;" @onclick="() => NavigateToMonster(m.url)">
+            <div style="margin-top:6px;">
+                <b style="color:black;">@m.name</b>
+            </div>
+        </div>
+        }
     </div>
 
 </body>
