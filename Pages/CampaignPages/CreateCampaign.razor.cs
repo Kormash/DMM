@@ -12,7 +12,7 @@ using System.IO;
 using Microsoft.AspNetCore.Components.Forms;
 using BlazorInputFile;
 using Microsoft.AspNetCore.Identity;
-
+using Syncfusion.Blazor.RichTextEditor;
 
 namespace DMM.Pages.CampaignPages
 {
@@ -97,5 +97,22 @@ namespace DMM.Pages.CampaignPages
             }
         }
 
+        private List<ToolbarItemModel> Tools = new List<ToolbarItemModel>()
+        {
+            new ToolbarItemModel() { Command = ToolbarCommand.Bold },
+            new ToolbarItemModel() { Command = ToolbarCommand.Italic },
+            new ToolbarItemModel() { Command = ToolbarCommand.Underline },
+            new ToolbarItemModel() { Command = ToolbarCommand.StrikeThrough },
+            new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+            new ToolbarItemModel() { Command = ToolbarCommand.FontName },
+            new ToolbarItemModel() { Command = ToolbarCommand.FontSize },
+            new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+            new ToolbarItemModel() { Command = ToolbarCommand.FontColor },
+            new ToolbarItemModel() { Command = ToolbarCommand.BackgroundColor },
+            new ToolbarItemModel() { Command = ToolbarCommand.CreateTable },
+            new ToolbarItemModel() { Command = ToolbarCommand.CreateLink },
+            new ToolbarItemModel() { Command = ToolbarCommand.Undo },
+            new ToolbarItemModel() { Command = ToolbarCommand.Redo }
+        };
     }
 }

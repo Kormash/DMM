@@ -110,6 +110,13 @@ using System.IO;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\Erik\source\repos\DMM\Pages\CampaignPages\CreateCampaign.razor"
+using Syncfusion.Blazor.RichTextEditor;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/mycampaigns/createcampaign")]
     public partial class CreateCampaign : Microsoft.AspNetCore.Components.ComponentBase
     {

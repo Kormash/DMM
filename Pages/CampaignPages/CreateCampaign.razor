@@ -1,6 +1,7 @@
 ﻿@page "/mycampaigns/createcampaign"
 @using Blazority
 @using System.IO
+@using Syncfusion.Blazor.RichTextEditor
 
 <%@Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %/>
 
@@ -10,7 +11,7 @@
     <Textarea Label="Campaign Title" @bind-Value="textAreaModel.InputName" style="resize:none;" />
     <br />
     <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="textAreaModel.InputDescription">
-        
+        <Syncfusion.Blazor.RichTextEditor.RichTextEditorToolbarSettings Items="@Tools" Type="ToolbarType.Expand" />
     </Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
     <br />
     <BlazorInputFile.InputFile OnChange="HandleFileSelected" multiple />
