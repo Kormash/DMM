@@ -1,6 +1,16 @@
 ﻿body {
 }
 
+@font-face {
+    font-family: ModestoBold;
+    src: url('open-iconic/font/fonts/Modesto Bold.ttf')
+}
+
+@font-face {
+    font-family: ModestoRegular;
+    src: url('open-iconic/font/fonts/Modesto Regular.ttf')
+}
+
 .CampaignDivSize {
     background-color: lightgray;
     border-radius: 10px;

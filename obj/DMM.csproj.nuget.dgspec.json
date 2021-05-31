@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Erik\\source\\repos\\DMM\\DMM.csproj": {}
+    "D:\\repos\\DMM\\DMM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Erik\\source\\repos\\DMM\\DMM.csproj": {
+    "D:\\repos\\DMM\\DMM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Erik\\source\\repos\\DMM\\DMM.csproj",
+        "projectUniqueName": "D:\\repos\\DMM\\DMM.csproj",
         "projectName": "DMM",
-        "projectPath": "C:\\Users\\Erik\\source\\repos\\DMM\\DMM.csproj",
-        "packagesPath": "C:\\Users\\Erik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Erik\\source\\repos\\DMM\\obj\\",
+        "projectPath": "D:\\repos\\DMM\\DMM.csproj",
+        "packagesPath": "C:\\Users\\denni\\.nuget\\packages\\",
+        "outputPath": "D:\\repos\\DMM\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Erik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\denni\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -125,7 +129,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

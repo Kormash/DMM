@@ -515,3 +515,14 @@ C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\MonsterPa
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\MonsterPages\MyMonsters.razor.g.cs
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\MonsterPages\MonsterTemplates.razor.g.cs
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\MonsterPages\MyMonsters.razor.g.cs
+D:\repos\DMM\bin\Debug\net5.0\Markdig.dll
+D:\repos\DMM\bin\Debug\net5.0\Syncfusion.Blazor.dll
+D:\repos\DMM\bin\Debug\net5.0\Syncfusion.ExcelExport.Net.dll
+D:\repos\DMM\bin\Debug\net5.0\Syncfusion.Licensing.dll
+D:\repos\DMM\bin\Debug\net5.0\Syncfusion.PdfExport.Net.dll
+D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\CampaignPages\CampaignView.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\MonsterPages\MonsterTemplates.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\MonsterPages\MyMonsters.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\CampaignPages\CampaignView.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\MonsterPages\MonsterTemplates.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\MonsterPages\MyMonsters.razor.g.cs
