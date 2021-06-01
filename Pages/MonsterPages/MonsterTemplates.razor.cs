@@ -86,16 +86,21 @@ namespace DMM.Pages.MonsterPages
             {
                 if (!monster.Equals(","))
                 {
-                    char[] sperator = new char[] { ',', ':' };
-                    String[] monsterString = monster.Split(sperator, StringSplitOptions.RemoveEmptyEntries);
+                    
+                    String[] monsterString = monster.Split("\",", StringSplitOptions.RemoveEmptyEntries);
 
                     MonsterItem monsterItem = new();
+                    string index = Regex.Replace(monsterString[0], "\"index\":", "");
+                    string name = Regex.Replace(monsterString[1], "\"name\":", "");
+                    string url = Regex.Replace(monsterString[2], "\"url\":", "");
+                    index = Regex.Replace(index, "\"", "");
+                    name = Regex.Replace(name, "\"", "");
+                    url = Regex.Replace(url, "/api", "");
+                    url = Regex.Replace(url, "\"", "");
 
-                    monsterItem.index = Regex.Replace(monsterString[1], "\"", "");
-                    monsterItem.name = Regex.Replace(monsterString[3], "\"", "");
-                    string url = Regex.Replace(monsterString[5], "\"", "");
-                    monsterItem.url = Regex.Replace(url, "/api", "");
-                    monsterItem.apiResponse = "";
+                    monsterItem.index = index;
+                    monsterItem.name = name;
+                    monsterItem.url = url;
 
                     MonsterList.Add(monsterItem);
 
