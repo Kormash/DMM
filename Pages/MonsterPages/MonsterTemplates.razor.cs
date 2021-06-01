@@ -34,6 +34,7 @@ namespace DMM.Pages.MonsterPages
         //Variables
         public string Output = "Hello World!";
         public string monsterName = "";
+        List<ActionModel> ActionList = new();
 
         public List<MonsterItem> MonsterList = new();
         //UserVariables
@@ -123,24 +124,38 @@ namespace DMM.Pages.MonsterPages
                     Console.WriteLine("\nException Caught!");
                     Console.WriteLine("Message :{0} ", e.Message);
                 }
+
+                monster.Monster.Name = GetMonsterName(monster.apiResponse);
+                monster.Monster.Size = GetMonsterSize(monster.apiResponse);
+                monster.Monster.Type = GetMonsterType(monster.apiResponse);
+                monster.Monster.SubType = GetMonsterSubtype(monster.apiResponse);
+                monster.Monster.Alignment = GetMonsterAlignment(monster.apiResponse);
+                monster.Monster.ArmorClass = GetMonsterArmorClass(monster.apiResponse);
+                monster.Monster.HitPoints = GetMonsterHitPoints(monster.apiResponse);
+                monster.Monster.Speed = GetMonsterSpeed(monster.apiResponse);
+                monster.Monster.Strength = GetMonsterStrength(monster.apiResponse);
+                monster.Monster.Dexterity = GetMonsterDexterity(monster.apiResponse);
+                monster.Monster.Constitution = GetMonsterConstitution(monster.apiResponse);
+                monster.Monster.Intelligence = GetMonsterIntelligence(monster.apiResponse);
+                monster.Monster.Wisdom = GetMonsterWisdom(monster.apiResponse);
+                monster.Monster.Charisma = GetMonsterCharisma(monster.apiResponse);
+                monster.Monster.HitDice = GetMonsterHitDice(monster.apiResponse, monster.Monster.Constitution);
+                monster.Monster.SavingThrows = GetMonsterSavingThrows(monster.apiResponse);
+                monster.Monster.Skills = GetMonsterSkills(monster.apiResponse);
+                monster.Monster.DamageVulnerabilities = GetMonsterVulnerabilities(monster.apiResponse);
+                monster.Monster.DamageResistances = GetMonsterResistances(monster.apiResponse);
+                monster.Monster.DamageImmunities = GetMonsterImmunities(monster.apiResponse);
+                monster.Monster.ConditionImmunities = GetMonsterConditionImmunities(monster.apiResponse);
+                monster.Monster.Senses = GetMonsterSenses(monster.apiResponse);
+                monster.Monster.Languages = GetMonsterLanguages(monster.apiResponse);
+                monster.Monster.Challange = GetMonsterChallenge(monster.apiResponse);
+                monster.AbilityList = GetMonsterAbilities(monster.apiResponse);
+                monster.ActionList = GetMonsterAction(monster.apiResponse);
+                monster.LegendaryActionList = GetMonsterLegendaryAction(monster.apiResponse);
+
             }
 
-            monster.Monster.Name = GetMonsterName(monster.apiResponse);
-            monster.Monster.Size = GetMonsterSize(monster.apiResponse);
-            monster.Monster.Type = GetMonsterType(monster.apiResponse);
-            monster.Monster.SubType = GetMonsterSubtype(monster.apiResponse);
-            monster.Monster.Alignment = GetMonsterAlignment(monster.apiResponse);
-            monster.Monster.ArmorClass = GetMonsterArmorClass(monster.apiResponse);
-            monster.Monster.HitPoints = GetMonsterHitPoints(monster.apiResponse);
-            monster.Monster.Speed = GetMonsterSpeed(monster.apiResponse);
-            monster.Monster.Strength = GetMonsterStrength(monster.apiResponse);
-            monster.Monster.Dexterity = GetMonsterDexterity(monster.apiResponse);
-            monster.Monster.Constitution = GetMonsterConstitution(monster.apiResponse);
-            monster.Monster.Intelligence = GetMonsterIntelligence(monster.apiResponse);
-            monster.Monster.Wisdom = GetMonsterWisdom(monster.apiResponse);
-            monster.Monster.Charisma = GetMonsterCharisma(monster.apiResponse);
-            monster.Monster.HitDice = GetMonsterHitDice(monster.apiResponse, monster.Monster.Constitution);
-
+            
 
             monster.hidden = !monster.hidden;
         }
@@ -245,9 +260,12 @@ namespace DMM.Pages.MonsterPages
 
             int result = diceCount * ConMod;
 
-            if (result >= 0)
+            if (result > 0)
             {
                 hd = hd + "+";
+            }else if (result == 0)
+            {
+                return hd;
             }
 
             return hd + result;
@@ -365,7 +383,7 @@ namespace DMM.Pages.MonsterPages
             }
             return result;
         }
-        public string GetMonsterProficiencies(string apiResponse)
+        public string GetMonsterSavingThrows(string apiResponse)
         {
             string proficiency = Regex.Match(apiResponse, "proficiencies\":\\[.+?\\]").Value;
 
@@ -374,13 +392,311 @@ namespace DMM.Pages.MonsterPages
 
             String[] proficiencyList = proficiency.Split("},", StringSplitOptions.RemoveEmptyEntries);
 
+            string SavingThrowresults = "";
+
             foreach (var p in proficiencyList)
             {
-                //Manipulate
+                if(p.Contains("Saving Throw"))
+                {
+                    string st = Regex.Match(p, "Saving Throw:.+?\"").Value;
+
+                    st = Regex.Replace(st, "\"", "");
+                    st = Regex.Replace(st, "Saving Throw:", "");
+
+                    string value = Regex.Match(p, "value\":.+?,").Value;
+
+                    value = Regex.Replace(value, ",", "");
+                    value = Regex.Replace(value, "value\":", "");
+                    value = Regex.Replace(value, "\"", "");
+
+                    if (SavingThrowresults != "")
+                    {
+                        SavingThrowresults = SavingThrowresults + ", "+ st + " +" + value;
+                    }
+                    else
+                    {
+                        SavingThrowresults = SavingThrowresults + st + " +" + value;
+                    }
+
+                }
             }
 
-            return proficiencyList[0];
+            return SavingThrowresults; 
         }
+        public string GetMonsterSkills(string apiResponse)
+        {
+            string proficiency = Regex.Match(apiResponse, "proficiencies\":\\[.+?\\]").Value;
+
+            proficiency = Regex.Replace(proficiency, "\\]", "");
+            proficiency = Regex.Replace(proficiency, "proficiencies\":\\[", "");
+
+            String[] proficiencyList = proficiency.Split("},", StringSplitOptions.RemoveEmptyEntries);
+
+            string SkillResults = "";
+
+            foreach (var p in proficiencyList)
+            {
+                if (p.Contains("Skill"))
+                {
+                    string st = Regex.Match(p, "Skill:.+?\"").Value;
+
+                    st = Regex.Replace(st, "\"", "");
+                    st = Regex.Replace(st, "Skill:", "");
+
+                    string value = Regex.Match(p, "value\":.+?,").Value;
+
+                    value = Regex.Replace(value, ",", "");
+                    value = Regex.Replace(value, "value\":", "");
+                    value = Regex.Replace(value, "\"", "");
+
+                    if (SkillResults != "")
+                    {
+                        SkillResults = SkillResults + ", " + st + " +" + value;
+                    }
+                    else
+                    {
+                        SkillResults = SkillResults + st + " +" + value;
+                    }
+
+                }
+            }
+
+            return SkillResults;
+        }
+        public string GetMonsterVulnerabilities(string apiResponse)
+        {
+            string dv = Regex.Match(apiResponse, "damage_vulnerabilities\":\\[.*?\\]").Value;
+
+            dv = Regex.Replace(dv, "\\]", "");
+            dv = Regex.Replace(dv, "damage_vulnerabilities\":\\[", "");
+            dv = Regex.Replace(dv, "\"","");
+            dv = Regex.Replace(dv, ",", ", ");
+            dv = Regex.Replace(dv, ",  ", ", ");
+
+            return dv;
+        }
+        public string GetMonsterResistances(string apiResponse)
+        {
+            string dr = Regex.Match(apiResponse, "damage_resistances\":\\[.*?\\]").Value;
+
+            dr = Regex.Replace(dr, "\\]", "");
+            dr = Regex.Replace(dr, "damage_resistances\":\\[", "");
+            dr = Regex.Replace(dr, "\"", "");
+            dr = Regex.Replace(dr, ",", ", ");
+
+            return dr;
+        }
+        public string GetMonsterImmunities(string apiResponse)
+        {
+            string di = Regex.Match(apiResponse, "damage_immunities\":\\[.*?\\]").Value;
+
+            di = Regex.Replace(di, "\\]", "");
+            di = Regex.Replace(di, "damage_immunities\":\\[", "");
+            di = Regex.Replace(di, "\"", "");
+            di = Regex.Replace(di, ",", ", ");
+            di = Regex.Replace(di, ",  ", ", ");
+
+            return di;
+        }
+        public string GetMonsterConditionImmunities(string apiResponse)
+        {
+            string ci = Regex.Match(apiResponse, "condition_immunities\":\\[.*?\\]").Value;
+
+            ci = Regex.Replace(ci, "\\]", "");
+            ci = Regex.Replace(ci, "condition_immunities\":\\[", "");
+            ci = Regex.Replace(ci, "\"", "");
+
+            String[] ConditionList = ci.Split("},", StringSplitOptions.RemoveEmptyEntries);
+
+            string ConditionResult = "";
+
+            foreach (var p in ConditionList)
+            {
+
+                string st = Regex.Match(p, "name:.+?,").Value;
+
+                st = Regex.Replace(st, ",", "");
+                st = Regex.Replace(st, "name:", "");
+
+                if (ConditionResult != "")
+                {
+                    ConditionResult = ConditionResult + ", " + st;
+                }
+                else
+                {
+                    ConditionResult = ConditionResult + st;
+                }
+
+
+
+            }
+            return ConditionResult;
+        }
+        public string GetMonsterSenses(string apiResponse)
+        {
+
+            string sense = Regex.Match(apiResponse, "senses\":\\{.+?\\}").Value; ;
+
+            sense = Regex.Replace(sense, "\\}", "");
+            sense = Regex.Replace(sense, "senses\":\\{", "");
+            sense = Regex.Replace(sense, "\"", "");
+            sense = Regex.Replace(sense, ":", " ");
+            sense = Regex.Replace(sense, "_", " ");
+            sense = Regex.Replace(sense, ",", ", ");
+
+            return sense;
+        }
+        public string GetMonsterLanguages(string apiResponse)
+        {
+
+            string Languages = Regex.Match(apiResponse, "languages\":.+?\",").Value; ;
+
+            Languages = Regex.Replace(Languages, "\",", "");
+            Languages = Regex.Replace(Languages, "\"", "");
+            Languages = Regex.Replace(Languages, "languages:", "");
+            Languages = Regex.Replace(Languages, ",", ", ");
+
+            return Languages;
+        }
+        public string GetMonsterChallenge(string apiResponse)
+        {
+
+            string Challenge = Regex.Match(apiResponse, "challenge_rating\":.+?,").Value;
+            string XP = Regex.Match(apiResponse, "xp\":.+?,").Value;
+
+            Challenge = Regex.Replace(Challenge, ",", "");
+            Challenge = Regex.Replace(Challenge, "\"", "");
+            Challenge = Regex.Replace(Challenge, "challenge_rating:", "");
+
+            XP = Regex.Replace(XP, ",", "");
+            XP = Regex.Replace(XP, "\"", "");
+            XP = Regex.Replace(XP, "xp:", "");
+
+            if(XP.Length >= 4)
+            {
+                char[] charArray = XP.ToCharArray();
+                Array.Reverse(charArray);
+                int i = 1;
+                XP = "";
+                foreach (var c in charArray)
+                {
+                    XP = c + XP;
+                    if (i % 3 == 0 && i != charArray.Length)
+                    {
+                        XP = "," + XP;
+                    }
+
+                    i++;
+                }
+            }
+
+            return Challenge + $" ({XP} XP)";
+        }
+        public List<ActionModel> GetMonsterAbilities(string apiResponse)
+        {
+            List<ActionModel> abilities = new();
+            string ability = Regex.Match(apiResponse, "special_abilities\":.+?\\]").Value;
+
+            String[] list = ability.Split("},", StringSplitOptions.RemoveEmptyEntries);
+
+
+            foreach (var p in list)
+            {
+                ActionModel a = new();
+                string aname = Regex.Match(p, "name\":.+?\"").Value;
+
+                aname = Regex.Replace(aname, "\"", "");
+                aname = Regex.Replace(aname, "name:", "");
+
+                a.Name = aname;
+
+                string adesc = Regex.Match(p, "desc\":.+?\"").Value;
+
+                adesc = Regex.Replace(adesc, "\"", "");
+                adesc = Regex.Replace(adesc, "desc:", "");
+
+                a.Description = adesc;
+
+                if (a.Name != "" && a.Description != "")
+                {
+                    abilities.Add(a);
+                }
+
+            }
+
+            return abilities;
+        }
+        public List<ActionModel> GetMonsterAction(string apiResponse)
+        {
+            List<ActionModel> actions = new();
+            string action = Regex.Match(apiResponse, "actions\":.+?\\],").Value;
+
+            String[] list = action.Split("]},", StringSplitOptions.RemoveEmptyEntries);
+
+
+            foreach (var p in list)
+            {
+                ActionModel a = new();
+                string aname = Regex.Match(p, "name\":.+?\"").Value;
+
+                aname = Regex.Replace(aname, "\"", "");
+                aname = Regex.Replace(aname, "name:", "");
+
+                a.Name = aname;
+
+                string adesc = Regex.Match(p, "desc\":.+?\"").Value;
+
+                adesc = Regex.Replace(adesc, "\"", "");
+                adesc = Regex.Replace(adesc, "desc:", "");
+
+                a.Description = adesc;
+
+                if (a.Name != "" && a.Description != "")
+                {
+                    actions.Add(a);
+                }
+            }
+
+            return actions;
+        }
+        public List<ActionModel> GetMonsterLegendaryAction(string apiResponse)
+        {
+            List<ActionModel> actions = new();
+            string action = Regex.Match(apiResponse, "legendary_actions\":.+?\\],").Value;
+
+            String[] list = action.Split("},", StringSplitOptions.RemoveEmptyEntries);
+
+
+            foreach (var p in list)
+            {
+                ActionModel a = new();
+                string aname = Regex.Match(p, "name\":.+?\"").Value;
+
+                aname = Regex.Replace(aname, "\"", "");
+                aname = Regex.Replace(aname, "name:", "");
+
+                a.Name = aname;
+
+                string adesc = Regex.Match(p, "desc\":.+?\"").Value;
+
+                adesc = Regex.Replace(adesc, "\"", "");
+                adesc = Regex.Replace(adesc, "desc:", "");
+
+                a.Description = adesc;
+
+                if (a.Name != "" && a.Description != "")
+                {
+                    actions.Add(a);
+                }
+            }
+
+            return actions;
+        }
+    }
+    public class ActionModel
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 
     public class MonsterItem
@@ -391,5 +707,8 @@ namespace DMM.Pages.MonsterPages
         public string url { get; set; }
         public string apiResponse { get; set; }
         public bool hidden = true;
+        public List<ActionModel> AbilityList = new();
+        public List<ActionModel> ActionList = new();
+        public List<ActionModel> LegendaryActionList = new();
     }
 }

@@ -16,11 +16,22 @@
     src: url('open-iconic/font/fonts/Modesto Regular.ttf')
 }
 
+@font-face {
+    font-family: ModestoBold;
+    src: url('open-iconic/font/fonts/Modesto Bold.ttf')
+}
+
+.MonsterTextArialRegular {
+    font-family:Arial;
+    color:#58170D;
+    margin:0;
+}
+
 .CampaignDivSize {
     background-color: lightgray;
     border-radius: 10px;
     height: 200px;
-    width: 250px;
+    width: 400px;
     float: left;
     margin-left: 5%;
     margin-top: 5%;
@@ -35,10 +46,19 @@
     border-radius: 10px;
     height: 40px;
     width: 90%;
-    min-width:250px;
+    min-width:400px;
     float: left;
     margin:auto;
     margin-top: 12px;
+}
+
+.MonsterDivContainer {
+    float: left;
+    padding-bottom: 24px;
+    padding-top: 36px;
+    margin: auto;
+    width: 90%;
+    min-width: 400px;
 }
 
 .MonsterDivSize.hoverOutline:hover {
@@ -64,22 +84,33 @@
     border-radius: 2px;
 }
 
-.MonsterChunkDiv {
-    width: 49%;
-    min-width: 250px;
-    margin-left: 6px;
-    margin-right: 6px;
-    border-bottom: 4px solid #A52A2A;
-    border-image: linear-gradient(to right, #A52A2A, transparent) 1;
-}
-
-.MonsterChunkDivStatBlock {
+.MonsterChunkTitle {
     width: 99%;
     min-width: 250px;
     margin-left: 6px;
     margin-right: 6px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #A52A2A;
+}
+
+.MonsterChunkDiv {
+    width: 99%;
+    min-width: 250px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
     border-bottom: 4px solid #A52A2A;
     border-image: linear-gradient(to right, #A52A2A, transparent) 1;
+}
+
+.MonsterChunkDivMiddle {
+    width: 99%;
+    min-width: 250px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
 }
 
 .imageSize {

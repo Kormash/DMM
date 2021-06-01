@@ -26,9 +26,10 @@ namespace DMM.Models.Entities
         public int Charisma { get; set; }
         public string SavingThrows { get; set; }
         public string Skills { get; set; }
-        public string DamageWeakness { get; set; }
-        public string DamageResistance { get; set; }
-        public string DamageImmunity { get; set; }
+        public string DamageVulnerabilities { get; set; }
+        public string DamageResistances { get; set; }
+        public string DamageImmunities { get; set; }
+        public string ConditionImmunities { get; set; }
         public string Senses { get; set; }
         public string Languages { get; set; }
         public string Challange { get; set; }
