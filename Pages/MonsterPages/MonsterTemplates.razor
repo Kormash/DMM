@@ -17,10 +17,11 @@
                 <b style="color:black;">@m.name</b>
             </div>
         </div>
-        <div hidden="@m.hidden" style="border:2px solid blue; float:left; padding-left:24px; padding-right:24px;padding-bottom:24px; padding-top:36px; width:90%">
-            <div style="background-image: url('/images/parchment.png'); float:left; border:2px solid red;">
-                <div style="border-bottom:3px solid #822000; ">
-                    <h3 style="font-family:ModestoBold;font-variant:small-caps;color:#822000;margin:0">@m.Monster.Name</h3>
+        <div hidden="@m.hidden" style="border:2px solid blue;float:left;padding-bottom: 24px; padding-top: 36px; width: 90%">
+            <div class="MonsterDivTop"></div>
+            <div style="background-image: url('/images/parchment.png');margin-right:24px;margin-left:24px;">
+                <div class="MonsterChunkDiv">
+                    <h1 style="letter-spacing:1px;font-family:NodestoBold;font-variant:small-caps;color:#822000;margin:0">@m.Monster.Name</h1>
                     <p style="font-family:Cambria;color:black;margin:0">
                         <i>
                             @m.Monster.Size
@@ -31,63 +32,65 @@
                         </i>
                     </p>
                 </div>
-                <div style="border-bottom:3px solid #822000;">
-                    <p style="font-family:ModestoBold;color:#822000;margin:0"> Armor Class @m.Monster.ArmorClass</p>
-                    <p style="font-family:ModestoBold;color:#822000;margin:0"> Hit Points @m.Monster.HitPoints (@m.Monster.HitDice)</p>
-                    <p style="font-family:ModestoBold;color:#822000;margin:0"> Speed @m.Monster.Speed</p>
+                <div class="MonsterChunkDiv">
+                    <p style="font-family:ModestoRegular;color:#58170D;margin:0;"> Armor Class @m.Monster.ArmorClass</p>
+                    <p style="font-family:ModestoRegular;color:#58170D;margin:0;"> Hit Points @m.Monster.HitPoints (@m.Monster.HitDice)</p>
+                    <p style="font-family:ModestoRegular;color:#58170D;margin:0;"> Speed @m.Monster.Speed</p>
                 </div>
-                <div style="border-bottom:3px solid #822000;">
+                <div class="MonsterChunkDivStatBlock">
                     <table style="width:100%">
                         <tr>
                             <th>
-                                <h4 style="font-family:ModestoBold;color:#822000;margin:0;text-align:center"> STR</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> STR</h5>
                             </th>
                             <th>
-                                <h4 style="font-family:ModestoBold;color:#822000;margin:0;text-align:center"> DEX</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> DEX</h5>
                             </th>
                             <th>
-                                <h4 style="font-family:ModestoBold;color:#822000;margin:0;text-align:center"> CON</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> CON</h5>
                             </th>
                             <th>
-                                <h4 style="font-family:ModestoBold;color:#822000;margin:0;text-align:center"> INT</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> INT</h5>
                             </th>
                             <th>
-                                <h4 style="font-family:ModestoBold;color:#822000;margin:0;text-align:center"> WIS</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> WIS</h5>
                             </th>
                             <th>
-                                <h4 style="font-family:ModestoBold;color:#822000;margin:0;text-align:center"> CHA</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> CHA</h5>
                             </th>
                         </tr>
                         <tr>
                             <td>
-                                <h4 style="font-family:ModestoRegular;color:#822000;margin:0;text-align:center">@m.Monster.Strength (@if (GetModifier(m.Monster.Strength) >= 0)
-                                                                {<t>+</t>}@GetModifier(m.Monster.Strength))</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">@m.Monster.Strength (@if (GetModifier(m.Monster.Strength) >= 0)
+                                                                {<t>+</t>}@GetModifier(m.Monster.Strength))</h5>
                             </td>
                             <td>
-                                <h4 style="font-family:ModestoRegular;color:#822000;margin:0;text-align:center">@m.Monster.Dexterity (@if (GetModifier(m.Monster.Dexterity) >= 0)
-                                                                {<t>+</t>}@GetModifier(m.Monster.Dexterity))</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">@m.Monster.Dexterity (@if (GetModifier(m.Monster.Dexterity) >= 0)
+                                                                {<t>+</t>}@GetModifier(m.Monster.Dexterity))</h5>
                             </td>
                             <td>
-                                <h4 style="font-family:ModestoRegular;color:#822000;margin:0;text-align:center">@m.Monster.Constitution (@if (GetModifier(m.Monster.Constitution) >= 0)
-                                                                {<t>+</t>}@GetModifier(m.Monster.Constitution))</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">@m.Monster.Constitution (@if (GetModifier(m.Monster.Constitution) >= 0)
+                                                                {<t>+</t>}@GetModifier(m.Monster.Constitution))</h5>
                             </td>
                             <td>
-                                <h4 style="font-family:ModestoRegular;color:#822000;margin:0;text-align:center">@m.Monster.Intelligence (@if (GetModifier(m.Monster.Intelligence) >= 0)
-                                                                {<t>+</t>}@GetModifier(m.Monster.Intelligence))</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">@m.Monster.Intelligence (@if (GetModifier(m.Monster.Intelligence) >= 0)
+                                                                {<t>+</t>}@GetModifier(m.Monster.Intelligence))</h5>
                             </td>
                             <td>
-                                <h4 style="font-family:ModestoRegular;color:#822000;margin:0;text-align:center">@m.Monster.Wisdom (@if (GetModifier(m.Monster.Wisdom) >= 0)
-                                                                {<t>+</t>}@GetModifier(m.Monster.Wisdom))</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">@m.Monster.Wisdom (@if (GetModifier(m.Monster.Wisdom) >= 0)
+                                                                {<t>+</t>}@GetModifier(m.Monster.Wisdom))</h5>
                             </td>
                             <td>
-                                <h4 style="font-family:ModestoRegular;color:#822000;margin:0;text-align:center">@m.Monster.Charisma (@if (GetModifier(m.Monster.Charisma) >= 0)
-                                                                {<t>+</t>}@GetModifier(m.Monster.Charisma))</h4>
+                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">@m.Monster.Charisma (@if (GetModifier(m.Monster.Charisma) >= 0)
+                                                                {<t>+</t>}@GetModifier(m.Monster.Charisma))</h5>
                             </td>
                         </tr>
                     </table>
+
                 </div>
                 @m.apiResponse
             </div> 
+            <div class="MonsterDivBottom"></div>
         </div>
         }
     </div>

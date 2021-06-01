@@ -2,8 +2,13 @@
 }
 
 @font-face {
-    font-family: ModestoBold;
-    src: url('open-iconic/font/fonts/Modesto Bold.ttf')
+    font-family: NodestoBold;
+    src: url('open-iconic/font/fonts/Nodesto Caps Condensed Bold.otf')
+}
+
+@font-face {
+    font-family: NodestoRegular;
+    src: url('open-iconic/font/fonts/Nodesto Caps Condensed.otf')
 }
 
 @font-face {
@@ -38,6 +43,43 @@
 
 .MonsterDivSize.hoverOutline:hover {
     box-shadow: 0 0 3pt 2pt darkgray;
+}
+
+.MonsterDivTop {
+    height: 4px;
+    background-color: tan;
+    border: 1px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 24px;
+    border-radius: 2px;
+}
+
+.MonsterDivBottom {
+    height: 4px;
+    background-color: tan;
+    border: 1px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 2px;
+}
+
+.MonsterChunkDiv {
+    width: 49%;
+    min-width: 250px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-bottom: 4px solid #A52A2A;
+    border-image: linear-gradient(to right, #A52A2A, transparent) 1;
+}
+
+.MonsterChunkDivStatBlock {
+    width: 99%;
+    min-width: 250px;
+    margin-left: 6px;
+    margin-right: 6px;
+    border-bottom: 4px solid #A52A2A;
+    border-image: linear-gradient(to right, #A52A2A, transparent) 1;
 }
 
 .imageSize {
