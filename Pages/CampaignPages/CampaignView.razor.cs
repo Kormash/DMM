@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using DMM.Models.Entities;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
+using BlazorInputFile;
+using System.IO;
 
 namespace DMM.Pages.CampaignPages
 {
@@ -25,14 +27,20 @@ namespace DMM.Pages.CampaignPages
         [Inject]
         CampaignService CampaignService { get; set; }
         [Inject]
+        AreaService AreaService { get; set; }
+        [Inject]
         UserManager<IdentityUser> UserManager { get; set; }
 
         //Variables
         private Campaign Campaign = new Campaign();
+        private Area Area = new Area();
         [Parameter]
         public int CampaignId { get; set; }
         public bool EditCampaignDisabled = true;
-        private CampaignModel Model = new();
+        private CampaignModel campaignModel = new();
+        private AreaModel areaModel = new();
+        public List<Area> AreaList = new();
+        public bool hideAddArea = true;
 
         //UserVariables
         private string UserId { get; set; }
@@ -43,11 +51,18 @@ namespace DMM.Pages.CampaignPages
         protected override void OnParametersSet()
         {
             // Required Markdig https://www.nuget.org/packages/Markdig/
-            var html = Markdig.Markdown.ToHtml(Model.Description ?? "");
+            var html = Markdig.Markdown.ToHtml(campaignModel.Description ?? "");
             convertedMarkdown = (MarkupString)html; // or new MarkupString(html)
         }
 
         public class CampaignModel
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public byte[] Image { get; set; }
+        }
+
+        public class AreaModel
         {
             public string Name { get; set; }
             public string Description { get; set; }
@@ -74,20 +89,58 @@ namespace DMM.Pages.CampaignPages
                 CanEdit = false;
             }
 
-            Model.Name = Campaign.Name;
-            Model.Description = Campaign.Description;
-            Model.Image = Campaign.Image;
+            campaignModel.Name = Campaign.Name;
+            campaignModel.Description = Campaign.Description;
+            campaignModel.Image = Campaign.Image;
+
+            AreaList = await AreaService.GetAreasByCampaignID(CampaignId);
         } 
 
         public async Task SaveCampaign()
         {
             Campaign c = Campaign;
 
-            c.Name = Model.Name;
-            c.Description = Model.Description;
-            c.Image = Model.Image;
+            c.Name = campaignModel.Name;
+            c.Description = campaignModel.Description;
+            c.Image = campaignModel.Image;
 
             await CampaignService.Update(c);
         }
+
+        public async Task AddNewArea()
+        {
+            hideAddArea = false;
+        }
+
+        async Task HandleSelection(IFileListEntry[] files)
+        {
+            var file = files.FirstOrDefault();
+            if(file.Name.EndsWith(".jpg") || file.Name.EndsWith(".png"))
+            {
+                var ms = new MemoryStream();
+                await file.Data.CopyToAsync(ms);
+                areaModel.Image = ms.ToArray();
+            }
+        }
+
+        public async Task SaveArea()
+        {
+            Area a = new();
+
+            a.CampaignID = CampaignId;
+            a.Name = areaModel.Name;
+            if(areaModel.Image != null)
+            {
+                a.Image = areaModel.Image;
+            }
+            await AreaService.Insert(a);
+        }
+
+        public void NavigateToArea(int areaID)
+        {
+
+        }
+
+
     }
 }

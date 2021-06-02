@@ -27,13 +27,51 @@
 
     @if (CanEdit)
     {
-        <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="@Model.Description" SaveInterval="1"></Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
+        <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="@campaignModel.Description" SaveInterval="1"></Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
         <Button @onclick="() => SaveCampaign()">SAVE</Button>
     }
     else
     {
         @convertedMarkdown
     }
+
+<div style="padding-top:12px;">
+    @foreach (var a in AreaList)
+    {
+        <div class="CampaignDivSize hoverOutline" style="text-align:center;" @onclick="() => NavigateToArea(a.Id)">
+            <div>
+                @if (a.Image == null)
+                {
+                    <img class="imageSize" src="/images/d20Red.webp" alt="d20Red" asp-append-version="true" />
+                }
+                else
+                {
+                    string img = SharedMethods.ConvertImageToDisplay(a.Image);
+                    <img class="imageSize" src="@img" alt="d20Red" asp-append-version="true" />
+                }
+            </div>
+            <div style="margin-top:6px;">
+                <b style="color:black;">@a.Name</b>
+            </div>
+        </div>
+    }
+    
+<div class="CampaignDivSize hoverOutline" hidden="@hideAddArea">
+    <div class="drag-drop-zone">
+        <BlazorInputFile.InputFile OnChange="HandleSelection" />
+    </div>   
+</div>
+
+
+    <div class="CampaignDivSize hoverOutline" style="text-align:center;" @onclick="() => AddNewArea()">
+        <div>
+            <img class="imageSize" src="/images/plus.png" alt="plus" asp-append-version="true" />
+        </div>
+        <div style="margin-top:6px;">
+            <b style="color:black;">Add new Area</b>
+        </div>
+    </div>
+</div>
 
 
 
