@@ -163,11 +163,6 @@ namespace DMM.Pages.CampaignPages
             this.StateHasChanged();
         }
 
-        public void NavigateToArea(int areaID)
-        {
-
-        }
-
         public string ConvertImage(byte[] Image)
         {
             return SharedMethods.ConvertImageToDisplay(Image);
@@ -183,6 +178,11 @@ namespace DMM.Pages.CampaignPages
         {
             hideAddArea = true;
             hideNewAddArea = false;
+        }
+
+        public void NavigateToArea(int id)
+        {
+            NavigationManager.NavigateTo($"/area/{id}");
         }
 
     }
