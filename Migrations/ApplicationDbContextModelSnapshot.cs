@@ -145,6 +145,24 @@ namespace DMM.Migrations
                     b.ToTable("Campaigns");
                 });
 
+            modelBuilder.Entity("DMM.Models.Entities.Icon", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Icons");
+                });
+
             modelBuilder.Entity("DMM.Models.Entities.Item", b =>
                 {
                     b.Property<int>("Id")

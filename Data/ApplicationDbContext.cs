@@ -24,6 +24,7 @@ namespace DMM.Data
         public DbSet<AttatchedFile> AttatchedFiles { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Icon> Icons { get; set; }
         public DbSet<ItemFeatureTrait> ItemFeatureTraits { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Loot> Loots { get; set; }

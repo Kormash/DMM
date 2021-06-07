@@ -525,3 +525,6 @@ D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\MonsterPages\MyMonsters.raz
 D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\CampaignPages\CampaignView.razor.g.cs
 D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\MonsterPages\MonsterTemplates.razor.g.cs
 D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\MonsterPages\MyMonsters.razor.g.cs
+C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\AdminPages\Administration.razor.g.cs
+C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\AdminPages\Administration.razor.g.cs
+C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\DMM.csprojAssemblyReference.cache

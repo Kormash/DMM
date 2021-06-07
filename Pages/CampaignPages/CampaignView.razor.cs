@@ -29,6 +29,8 @@ namespace DMM.Pages.CampaignPages
         [Inject]
         AreaService AreaService { get; set; }
         [Inject]
+        IconService IconService { get; set; }
+        [Inject]
         UserManager<IdentityUser> UserManager { get; set; }
 
         //Variables
@@ -40,11 +42,14 @@ namespace DMM.Pages.CampaignPages
         private CampaignModel campaignModel = new();
         private AreaModel areaModel = new();
         public List<Area> AreaList = new();
+        public List<Icon> IconList = new();
         public bool hideAddArea = true;
+        public bool hideNewAddArea = false;
 
         //UserVariables
         private string UserId { get; set; }
         private bool CanEdit { get; set; }
+        private bool AddImageModal = false;
 
         private MarkupString convertedMarkdown { get; set; }
 
@@ -94,6 +99,7 @@ namespace DMM.Pages.CampaignPages
             campaignModel.Image = Campaign.Image;
 
             AreaList = await AreaService.GetAreasByCampaignID(CampaignId);
+            IconList = await IconService.GetAllIcons();
         } 
 
         public async Task SaveCampaign()
@@ -110,6 +116,7 @@ namespace DMM.Pages.CampaignPages
         public async Task AddNewArea()
         {
             hideAddArea = false;
+            hideNewAddArea = true;
         }
 
         async Task HandleSelection(IFileListEntry[] files)
@@ -120,7 +127,13 @@ namespace DMM.Pages.CampaignPages
                 var ms = new MemoryStream();
                 await file.Data.CopyToAsync(ms);
                 areaModel.Image = ms.ToArray();
+                AddImageModal = false;
             }
+        }
+
+        public void AddImageShow()
+        {
+            AddImageModal = true;
         }
 
         public async Task SaveArea()
@@ -128,12 +141,26 @@ namespace DMM.Pages.CampaignPages
             Area a = new();
 
             a.CampaignID = CampaignId;
-            a.Name = areaModel.Name;
+            if(areaModel.Name == null || areaModel.Name == "")
+            {
+                a.Name = "New Area";
+            }
+            else
+            {
+                a.Name = areaModel.Name;
+            }
+            
             if(areaModel.Image != null)
             {
                 a.Image = areaModel.Image;
             }
             await AreaService.Insert(a);
+
+            hideAddArea = true;
+            hideNewAddArea = false;
+
+            AreaList = await AreaService.GetAreasByCampaignID(CampaignId);
+            this.StateHasChanged();
         }
 
         public void NavigateToArea(int areaID)
@@ -141,6 +168,22 @@ namespace DMM.Pages.CampaignPages
 
         }
 
+        public string ConvertImage(byte[] Image)
+        {
+            return SharedMethods.ConvertImageToDisplay(Image);
+        }
+
+        public void SelectImage(byte[] Image)
+        {
+            areaModel.Image = Image;
+            AddImageModal = false;
+        }
+
+        public void CancelAddNewArea()
+        {
+            hideAddArea = true;
+            hideNewAddArea = false;
+        }
 
     }
 }

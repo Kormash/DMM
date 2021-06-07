@@ -56,6 +56,7 @@ namespace DMM
 
             services.AddScoped<CampaignService>();
             services.AddScoped<MonsterService>();
+            services.AddScoped<IconService>();
             services.AddScoped<MonsterTemplateService>();
             services.AddScoped<AreaService>();
 
