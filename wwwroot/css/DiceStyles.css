@@ -1,0 +1,62 @@
+﻿body {
+}
+
+.scrollbar {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+    .scrollbar::-webkit-scrollbar {
+        width: 12px; /* width of the entire scrollbar */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* color of the tracking area */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+}
+
+.scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: #404040; /* color of the scroll thumb */
+    border-radius:20px; /* roundness of the scroll thumb */
+    border: 1px solid black;
+    opacity: 0.3;
+    }
+
+.woodTray {
+    border: 3px solid black;
+    height: 500px;
+    width: 500px;
+    background-size: 101% 101%;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+}
+
+.velvetTray {
+    border: 3px solid black;
+    height: 400px;
+    margin-left: 6px;
+    margin-top: 6px;
+    background-size: 100% 100%;
+    float: left;
+    width: 400px;
+}
+
+.dieResultContainer {
+    float: left;
+    width: auto;
+    height: 100%;
+    border:2px solid green;
+}
+
+.dieResult {
+    width: 60px;
+    height: 60px;
+    margin-left: 12px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
