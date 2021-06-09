@@ -34,6 +34,14 @@ namespace DMM.Pages.AreaPages
         List<Dice> d6List = new();
         List<Dice> d4List = new();
 
+        int d100toRoll = 0;
+        int d20toRoll = 0;
+        int d12toRoll = 0;
+        int d10toRoll = 0;
+        int d8toRoll = 0;
+        int d6toRoll = 0;
+        int d4toRoll = 0;
+
         DiceModel diceModel = new();
 
         [Parameter]
@@ -44,10 +52,80 @@ namespace DMM.Pages.AreaPages
             
         }
 
+        public void AddD100()
+        {
+            d100toRoll++;
+        }
+        public void AddD20()
+        {
+            d20toRoll++;
+        }
+        public void AddD12()
+        {
+            d12toRoll++;
+        }
+        public void AddD10()
+        {
+            d10toRoll++;
+        }
+        public void AddD8()
+        {
+            d8toRoll++;
+        }
+        public void AddD6()
+        {
+            d6toRoll++;
+        }
+        public void AddD4()
+        {
+            d4toRoll++;
+        }
+
         public async Task RollDice()
         {
-            await DiceAPICall(diceNumber, diceType);
-            await UpdateModel();
+            if(d100toRoll != 0)
+            {
+                await DiceAPICall(d100toRoll, 100);
+                await UpdateModel();
+            }
+            if (d20toRoll != 0)
+            {
+                await DiceAPICall(d20toRoll, 20);
+                await UpdateModel();
+            }
+            if (d12toRoll != 0)
+            {
+                await DiceAPICall(d12toRoll, 12);
+                await UpdateModel();
+            }
+            if (d10toRoll != 0)
+            {
+                await DiceAPICall(d10toRoll, 10);
+                await UpdateModel();
+            }
+            if (d8toRoll != 0)
+            {
+                await DiceAPICall(d8toRoll, 8);
+                await UpdateModel();
+            }
+            if (d6toRoll != 0)
+            {
+                await DiceAPICall(d6toRoll, 6);
+                await UpdateModel();
+            }
+            if (d4toRoll != 0)
+            {
+                await DiceAPICall(d4toRoll, 4);
+                await UpdateModel();
+            }
+
+            d100toRoll = 0;
+            d20toRoll = 0;
+            d12toRoll = 0;
+            d10toRoll = 0;
+            d8toRoll = 0;
+            d6toRoll = 0;
+            d4toRoll = 0;
         }
 
         public async Task ClearDices()
@@ -133,6 +211,34 @@ namespace DMM.Pages.AreaPages
                 }
             }
 
+        }
+
+        public async Task RemoveDice(Dice dice)
+        {
+            switch (dice.DiceType)
+            {
+                case 100:
+                    d100List.Remove(dice);
+                    break;
+                case 20:
+                    d20List.Remove(dice);
+                    break;
+                case 12:
+                    d12List.Remove(dice);
+                    break;
+                case 10:
+                    d10List.Remove(dice);
+                    break;
+                case 8:
+                    d8List.Remove(dice);
+                    break;
+                case 6:
+                    d6List.Remove(dice);
+                    break;
+                case 4:
+                    d4List.Remove(dice);
+                    break;
+            }
         }
     }
 

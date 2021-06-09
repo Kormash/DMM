@@ -34,6 +34,7 @@
     background-size: 101% 101%;
     background-repeat: no-repeat;
     border-radius: 6px;
+    float: left;
 }
 
 .velvetTray {
@@ -50,13 +51,117 @@
     float: left;
     width: auto;
     height: 100%;
-    border:2px solid green;
+    margin-left: 12px;
 }
 
 .dieResult {
-    width: 60px;
-    height: 60px;
-    margin-left: 12px;
+    width: 50px;
+    height: 30px;
     border: 1px solid lightgrey;
     border-radius: 3px;
+    text-align: center;
 }
+
+.dieButtonContainer {
+    float: left;
+    width: 60px;
+    height: 100%;
+    margin-left: 12px;
+}
+
+.d20Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d20.png);
+    margin-top: 3px;
+}
+
+    .d20Button:hover {
+        background-image: url(../images/Dice/d20Hover.png);
+    }
+
+.d12Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d12.png);
+    margin-top: 3px;
+}
+
+    .d12Button:hover {
+        background-image: url(../images/Dice/d12Hover.png);
+    }
+
+.d10Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d10.png);
+    margin-top: 3px;
+}
+
+    .d10Button:hover {
+        background-image: url(../images/Dice/d10Hover.png);
+    }
+.d8Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d8.png);
+    margin-top: 3px;
+}
+
+    .d8Button:hover {
+        background-image: url(../images/Dice/d8Hover.png);
+    }
+
+.d6Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d6.png);
+    margin-top: 3px;
+}
+
+    .d6Button:hover {
+        background-image: url(../images/Dice/d6Hover.png);
+    }
+
+.d4Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d4.png);
+    margin-top: 3px;
+}
+
+    .d4Button:hover {
+        background-image: url(../images/Dice/d4Hover.png);
+    }
+
+.rollButton {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/roll.png);
+    margin-top: 3px;
+}
+
+    .rollButton:hover {
+        background-image: url(../images/Dice/rollHover.png);
+    }
