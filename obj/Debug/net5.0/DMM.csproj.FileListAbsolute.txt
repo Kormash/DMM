@@ -530,3 +530,7 @@ C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\AdminPages\Administr
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\DMM.csprojAssemblyReference.cache
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\AreaPages\AreaView.razor.g.cs
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\AreaPages\AreaView.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\AdminPages\Administration.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\AreaPages\AreaView.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\AdminPages\Administration.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\AreaPages\AreaView.razor.g.cs

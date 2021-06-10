@@ -64,6 +64,20 @@ namespace DMM.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Icons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Icons", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MonsterTemplates",
                 columns: table => new
                 {
@@ -677,6 +691,9 @@ namespace DMM.Migrations
 
             migrationBuilder.DropTable(
                 name: "AttatchedFiles");
+
+            migrationBuilder.DropTable(
+                name: "Icons");
 
             migrationBuilder.DropTable(
                 name: "ItemFeatureTraits");

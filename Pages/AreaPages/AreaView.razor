@@ -7,170 +7,245 @@
 
         </div>
     </div>
-    <div>
-        <h5 class=".p4">Dice Number</h5>
-        <input type="text" @bind="diceNumber"></input>
-        <br />
-        <h5 class=".p4">Dice Type</h5>
-        <input type="text" @bind="diceType"></input>
-        <br />
-        <Button @onclick="()=>RollDice()">Roll Dice!</Button>
-        <Button @onclick="()=>ClearDices()">Clear Dices</Button>
-    </div>
-    <div style="float:right">
-
-        <div class="dieButtonContainer">
-            <div class="d20Button" @onclick="()=>AddD20()">
+    <div style="float:left;width:50%;min-width:600px;border:1px solid blue;">
+        <div class="LocationWoodTray">
+            <div class="LocationWoodBanner">
+                @if (LocationChoosen)
+                {
+                    <t class="LocationBannerText" style="font-family:ModestoBold;">@CurrentLocation.Name</t>
+                    <button @onclick="()=>Back()"></button>
+                }
+                else
+                {
+                    <t class="LocationBannerText" style="font-family:ModestoBold;">@area.Name</t>
+                }
             </div>
-            <div class="d12Button" @onclick="()=>AddD12()">
-            </div>
-            <div class="d10Button" @onclick="()=>AddD10()">
-            </div>
-            <div class="d8Button" @onclick="()=>AddD8()">
-            </div>
-            <div class="d6Button" @onclick="()=>AddD6()">
-            </div>
-            <div class="d4Button" @onclick="()=>AddD4()">
-            </div>
-            <div class="rollButton" @onclick="()=>RollDice()">
+            <div class="LocationParchmentPaperBackground">
+                @if (!LocationChoosen)
+                {
+                    foreach (var location in LocationList)
+                    {
+                        <div class="LocationStoneButton" @onclick="()=>ChooseLocation(location)">@location.Name</div>
+                    }
+                    <div class="LocationStoneButton">
+                        <div class="AddLocationTextArea">
+                             <input type="text" @bind="LocationName"/>
+                        </div>
+                        <div class="AddLocation vertical-center" @onclick="()=>AddLocation(LocationName)"></div>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <Tabs>
+                            <Tab>
+                                <Header>Map</Header>
+                                <ChildContent><p>This is the contents of tab 1.</p></ChildContent>
+                            </Tab>
+                            <Tab>
+                                <Header>Notes</Header>
+                                <ChildContent><p>@CurrentLocation.Description</p></ChildContent>
+                            </Tab>
+                            <Tab>
+                                <Header>Monsters</Header>
+                                <ChildContent><p>This is the contents of tab 3.</p></ChildContent>
+                            </Tab>
+                            <Tab>
+                                <Header>Loot</Header>
+                                <ChildContent><p>This is the contents of tab 3.</p></ChildContent>
+                            </Tab>
+                            <Tab>
+                                <Header>Description</Header>
+                                <ChildContent><p>@CurrentLocation.Description</p></ChildContent>
+                            </Tab>
+                        </Tabs>
+                    </div>
+                }
             </div>
         </div>
-
-        <div class="woodTray" style="background-image: url(images/diceTrayWood.png)">
-            <div class="velvetTray" style="background-image: url(images/diceTrayRed.png)">
-                <div class="scrollbar">
-                    @foreach (var dice in d100List)
-                    {
-                        <div style="background-color:darkslategray; float:left; width:50px; height:50px; margin-left:3px; margin-top:3px" @onclick="()=>RemoveDice(dice)">
-                            @dice.DiceResult
-                        </div>
-                        @if (dice.Equals(d100List.Last()))
-                        {
-                            <div style="float:left;width:100%;height:6px"></div>
-                        }
-                    }
-
-                    @foreach (var dice in d20List)
-                    {
-                        <div style="background-color:aquamarine; float:left; width:50px; height:50px; margin-left:3px; margin-top:3px" @onclick="()=>RemoveDice(dice)">
-                            @dice.DiceResult
-                        </div>
-                        @if (dice.Equals(d20List.Last()))
-                        {
-                            <div style="float:left;width:100%;height:6px"></div>
-                        }
-                    }
-
-                    @foreach (var dice in d12List)
-                    {
-                        <div style="background-color:teal; float:left; width:50px; height:50px; margin-left:3px; margin-top:3px" @onclick="()=>RemoveDice(dice)">
-                            @dice.DiceResult
-                        </div>
-                        @if (dice.Equals(d12List.Last()))
-                        {
-                            <div style="float:left;width:100%;height:6px"></div>
-                        }
-                    }
-
-                    @foreach (var dice in d10List)
-                    {
-                        <div style="background-color:yellowgreen; float:left; width:50px; height:50px; margin-left:3px; margin-top:3px" @onclick="()=>RemoveDice(dice)">
-                            @dice.DiceResult
-                        </div>
-                        @if (dice.Equals(d10List.Last()))
-                        {
-                            <div style="float:left;width:100%;height:6px"></div>
-                        }
-                    }
-
-                    @foreach (var dice in d8List)
-                    {
-                        <div style="background-color:orange; float:left; width:50px; height:50px; margin-left:3px; margin-top:3px" @onclick="()=>RemoveDice(dice)">
-                            @dice.DiceResult
-                        </div>
-                        @if (dice.Equals(d8List.Last()))
-                        {
-                            <div style="float:left;width:100%;height:6px"></div>
-                        }
-                    }
-
-                    @foreach (var dice in d6List)
-                    {
-                        <div style="background-color:hotpink; float:left; width:50px; height:50px; margin-left:3px; margin-top:3px" @onclick="()=>RemoveDice(dice)">
-                            @dice.DiceResult
-                        </div>
-                        @if (dice.Equals(d6List.Last()))
-                        {
-                            <div style="float:left;width:100%;height:6px"></div>
-                        }
-                    }
-
-                    @foreach (var dice in d4List)
-                    {
-                        <div style="background-color:rebeccapurple; float:left; width:50px; height:50px; margin-left:3px; margin-top:3px" @onclick="()=>RemoveDice(dice)">
-                            @dice.DiceResult
-                        </div>
-                        @if (dice.Equals(d4List.Last()))
-                        {
-                            <div style="float:left;width:100%;height:6px"></div>
-                        }
-                    }
+    </div>
+    <div style="float:left;width:50%;min-width:600px;border:1px solid green;">
+        <div style="float:right">
+            <div class="InitiativeWoodTray">
+                <div class="InitiativeVelvetTray">
 
                 </div>
-
             </div>
-            <div class="dieResultContainer">
-                @if (d100List.Count != 0)
-                {
-                    <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D100</p>
-                    <div class="dieResult" style="background-image: url(images/whitebackground.png)">
-                        <t style="font-family: ModestoBold; color: black; margin: 0;">@d100List.Sum(x => x.DiceResult)</t>
+        </div>
+        <div style="float:right;">
+            <div class="dieButtonContainer">
+                <div class="d20Button" @onclick="()=>AddD20()" @oncontextmenu="SubtractD20" @oncontextmenu:preventDefault="true">
+                    <div class="CountCircleDie" hidden="@HideD20Count">
+                        <t class="unselectable">@d20toRoll</t>
                     </div>
-                }
-                @if (d20List.Count != 0)
-                {
-                    <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D20</p>
-                    <div class="dieResult" style="background-image: url(images/whitebackground.png)">
-                        <t style="font-family: ModestoBold; color: black; margin: 0;">@d20List.Sum(x => x.DiceResult)</t>
+                </div>
+                <div class="d12Button" @onclick="()=>AddD12()" @oncontextmenu="SubtractD12" @oncontextmenu:preventDefault="true">
+                    <div class="CountCircleDie" hidden="@HideD12Count">
+                        <t class="unselectable">@d12toRoll</t>
                     </div>
-                }
-                @if (d12List.Count != 0)
-                {
-                    <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D12</p>
-                    <div class="dieResult" style="background-image: url(images/whitebackground.png)">
-                        <t style="font-family: ModestoBold; color: black; margin: 0;">@d12List.Sum(x => x.DiceResult)</t>
+                </div>
+                <div class="d10Button" @onclick="()=>AddD10()" @oncontextmenu="SubtractD10" @oncontextmenu:preventDefault="true">
+                    <div class="CountCircleDie" hidden="@HideD10Count">
+                        <t class="unselectable">@d10toRoll</t>
                     </div>
-                }
-                @if (d10List.Count != 0)
-                {
-                    <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D10</p>
-                    <div class="dieResult" style="background-image: url(images/whitebackground.png)">
-                        <t style="font-family: ModestoBold; color: black; margin: 0;">@d10List.Sum(x => x.DiceResult)</t>
+                </div>
+                <div class="d8Button" @onclick="()=>AddD8()" @oncontextmenu="SubtractD8" @oncontextmenu:preventDefault="true">
+                    <div class="CountCircleDie" hidden="@HideD8Count">
+                        <t class="unselectable">@d8toRoll</t>
                     </div>
-                }
-                @if (d8List.Count != 0)
-                {
-                    <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D8</p>
-                    <div class="dieResult" style="background-image: url(images/whitebackground.png)">
-                        <t style="font-family: ModestoBold; color: black; margin: 0;">@d8List.Sum(x => x.DiceResult)</t>
+                </div>
+                <div class="d6Button" @onclick="()=>AddD6()" @oncontextmenu="SubtractD6" @oncontextmenu:preventDefault="true">
+                    <div class="CountCircleDie" hidden="@HideD6Count">
+                        <t class="unselectable">@d6toRoll</t>
                     </div>
-                }
-                @if (d6List.Count != 0)
-                {
-                    <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D6</p>
-                    <div class="dieResult" style="background-image: url(images/whitebackground.png)">
-                        <t style="font-family: ModestoBold; color: black; margin: 0;">@d6List.Sum(x => x.DiceResult)</t>
+                </div>
+                <div class="d4Button" @onclick="()=>AddD4()" @oncontextmenu="SubtractD4" @oncontextmenu:preventDefault="true">
+                    <div class="CountCircleDie" hidden="@HideD4Count">
+                        <t class="unselectable">@d4toRoll</t>
                     </div>
-                }
-                @if (d4List.Count != 0)
-                {
-                    <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D4</p>
-                    <div class="dieResult" style="background-image: url(images/whitebackground.png)">
-                        <t style="font-family: ModestoBold; color: black; margin: 0;">@d4List.Sum(x => x.DiceResult)</t>
+                </div>
+                <div class="rollButton" @onclick="()=>RollDice()">
+                </div>
+                <div class="CancelButton" hidden="@HideCancel" @onclick="()=>ClearDices()">
+                </div>
+            </div>
+
+            <div class="woodTray" style="background-image: url(images/diceTrayWood.png)">
+                <div class="velvetTray" style="background-image: url(images/diceTrayRed.png)">
+                    <div class="scrollbar">
+                        @foreach (var dice in d100List)
+                        {
+                            <div class="d100Die" @onclick="()=>RemoveDice(dice)">
+                                <t class="DiceText" style="font-family:ModestoBold;">@dice.DiceResult</t>
+                            </div>
+                            @if (dice.Equals(d100List.Last()))
+                            {
+                                <div style="float:left;width:100%;height:6px"></div>
+                            }
+                        }
+
+                        @foreach (var dice in d20List)
+                        {
+                            <div class="d20Die" @onclick="()=>RemoveDice(dice)">
+                                <t class="DiceText" style="font-family:ModestoBold;">@dice.DiceResult</t>
+                            </div>
+                            @if (dice.Equals(d20List.Last()))
+                            {
+                                <div style="float:left;width:100%;height:6px"></div>
+                            }
+                        }
+
+                        @foreach (var dice in d12List)
+                        {
+                            <div class="d12Die" @onclick="()=>RemoveDice(dice)">
+                                <t class="DiceText" style="font-family:ModestoBold;">@dice.DiceResult</t>
+                            </div>
+                            @if (dice.Equals(d12List.Last()))
+                            {
+                                <div style="float:left;width:100%;height:6px"></div>
+                            }
+                        }
+
+                        @foreach (var dice in d10List)
+                        {
+                            <div class="d10Die" @onclick="()=>RemoveDice(dice)">
+                                <t class="DiceText" style="font-family:ModestoBold;">@dice.DiceResult</t>
+                            </div>
+                            @if (dice.Equals(d10List.Last()))
+                            {
+                                <div style="float:left;width:100%;height:6px"></div>
+                            }
+                        }
+
+                        @foreach (var dice in d8List)
+                        {
+                            <div class="d8Die" @onclick="()=>RemoveDice(dice)">
+                                <t class="DiceText" style="font-family:ModestoBold;">@dice.DiceResult</t>
+                            </div>
+                            @if (dice.Equals(d8List.Last()))
+                            {
+                                <div style="float:left;width:100%;height:6px"></div>
+                            }
+                        }
+
+                        @foreach (var dice in d6List)
+                        {
+                            <div class="d6Die" @onclick="()=>RemoveDice(dice)">
+                                <t class="DiceText" style="font-family:ModestoBold;">@dice.DiceResult</t>
+                            </div>
+                            @if (dice.Equals(d6List.Last()))
+                            {
+                                <div style="float:left;width:100%;height:6px"></div>
+                            }
+                        }
+
+                        @foreach (var dice in d4List)
+                        {
+                            <div class="d4Die" @onclick="()=>RemoveDice(dice)">
+                                <t class="DiceText" style="font-family:ModestoBold;">@dice.DiceResult</t>
+                            </div>
+                            @if (dice.Equals(d4List.Last()))
+                            {
+                                <div style="float:left;width:100%;height:6px"></div>
+                            }
+                        }
+
                     </div>
-                }
+
+                </div>
+                <div class="dieResultContainer">
+                    @if (d100List.Count != 0)
+                    {
+                        <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D100</p>
+                        <div class="dieResult" style="background-image: url(images/whitebackground.png)">
+                            <t style="font-family: ModestoBold; color: black; margin: 0;">@d100List.Sum(x => x.DiceResult)</t>
+                        </div>
+                    }
+                    @if (d20List.Count != 0)
+                    {
+                        <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D20</p>
+                        <div class="dieResult" style="background-image: url(images/whitebackground.png)">
+                            <t style="font-family: ModestoBold; color: black; margin: 0;">@d20List.Sum(x => x.DiceResult)</t>
+                        </div>
+                    }
+                    @if (d12List.Count != 0)
+                    {
+                        <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D12</p>
+                        <div class="dieResult" style="background-image: url(images/whitebackground.png)">
+                            <t style="font-family: ModestoBold; color: black; margin: 0;">@d12List.Sum(x => x.DiceResult)</t>
+                        </div>
+                    }
+                    @if (d10List.Count != 0)
+                    {
+                        <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D10</p>
+                        <div class="dieResult" style="background-image: url(images/whitebackground.png)">
+                            <t style="font-family: ModestoBold; color: black; margin: 0;">@d10List.Sum(x => x.DiceResult)</t>
+                        </div>
+                    }
+                    @if (d8List.Count != 0)
+                    {
+                        <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D8</p>
+                        <div class="dieResult" style="background-image: url(images/whitebackground.png)">
+                            <t style="font-family: ModestoBold; color: black; margin: 0;">@d8List.Sum(x => x.DiceResult)</t>
+                        </div>
+                    }
+                    @if (d6List.Count != 0)
+                    {
+                        <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D6</p>
+                        <div class="dieResult" style="background-image: url(images/whitebackground.png)">
+                            <t style="font-family: ModestoBold; color: black; margin: 0;">@d6List.Sum(x => x.DiceResult)</t>
+                        </div>
+                    }
+                    @if (d4List.Count != 0)
+                    {
+                        <p style="font-family:ModestoRegular;color:ghostwhite;margin:0;text-align:center">D4</p>
+                        <div class="dieResult" style="background-image: url(images/whitebackground.png)">
+                            <t style="font-family: ModestoBold; color: black; margin: 0;">@d4List.Sum(x => x.DiceResult)</t>
+                        </div>
+                    }
 
 
+                </div>
             </div>
         </div>
     </div>

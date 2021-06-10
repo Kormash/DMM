@@ -1,0 +1,91 @@
+﻿body {
+}
+
+.LocationWoodTray {
+    border: 3px solid black;
+    height: 500px;
+    width: 500px;
+    background-image: url(../images/diceTrayWood.png);
+    background-size: 101% 101%;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+    float: left;
+    margin-bottom: 12px;
+}
+
+.LocationBannerText {
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 50px;
+    font-size: xx-large;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+.LocationWoodBanner {
+    border: 2px solid black;
+    border-radius: 2px;
+    height: 50px;
+    width: 92%;
+    text-align: center;
+    margin-top: 6px;
+    margin: auto;
+    background-size: 100% 100%;
+    background-image: url(../images/WoodBanner.png)
+}
+
+.LocationParchmentPaperBackground {
+    height: 90%;
+    width: 90%;
+    padding-top:12px;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    background-size: 100% 100%;
+    background-image: url(../images/parchment.png)
+}
+
+.LocationStoneButton{
+    border: 2px solid black;
+    border-radius:2px;
+    height: 50px;
+    width: 300px;
+    margin-bottom:12px;
+    margin-left:auto;
+    margin-right:auto;
+    color:white;
+    background-image: url(../images/SlateStone.png);
+    background-size: 100% 100%;
+}
+
+.AddLocationTextArea {
+    position: relative;
+    width:50%;
+    height:50%;
+    float:left;
+
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.AddLocation {
+    float: right;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Icons/Add.png);
+}
+
+.AddLocation:hover {
+    background-image: url(../images/Icons/AddHover.png);
+}

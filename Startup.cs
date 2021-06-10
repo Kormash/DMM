@@ -59,6 +59,7 @@ namespace DMM
             services.AddScoped<IconService>();
             services.AddScoped<MonsterTemplateService>();
             services.AddScoped<AreaService>();
+            services.AddScoped<LocationService>();
 
             services.AddScoped<ActionTemplate>();
             services.AddScoped<Area>();
