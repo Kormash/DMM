@@ -7,7 +7,7 @@
 
         </div>
     </div>
-    <div style="float:left;width:50%;min-width:600px;border:1px solid blue;">
+    <div style="float:left;width:64%;min-width:600px;border:1px solid blue;">
         <div class="LocationWoodTray">
             <div class="LocationWoodBanner">
                 @if (LocationChoosen)
@@ -20,7 +20,7 @@
                     <t class="LocationBannerText" style="font-family:ModestoBold;">@area.Name</t>
                 }
             </div>
-            <div class="LocationParchmentPaperBackground">
+            <div class="LocationParchmentPaperBackground scrollbar">
                 @if (!LocationChoosen)
                 {
                     foreach (var location in LocationList)
@@ -64,10 +64,80 @@
             </div>
         </div>
     </div>
-    <div style="float:left;width:50%;min-width:600px;border:1px solid green;">
+    <div style="float:left;width:35%;min-width:600px;border:1px solid green;">
         <div style="float:right">
             <div class="InitiativeWoodTray">
-                <div class="InitiativeVelvetTray">
+                <div class="InitiativeVelvetTray scrollbar">
+
+                    @foreach (var initiative in InitiativeList)
+                    {
+                        @if (initiative.IsCurrent)
+                        {
+                            <div class="InitiativeObject" style="border:3px solid #5c57d0">
+                                <div style="float:left">
+                                    <t class="unselectable" style="color:white;">@initiative.Name</t>
+                                </div>
+                                <div class="RemoveInitiative" @onclick="()=>RemoveInitiative(initiative)">
+
+                                </div>
+                                <div style="width: 5%;float:right">
+                                    <t class="unselectable" style="color:white;">@initiative.Roll</t>
+                                </div>
+                                @if (initiative.HP != 0)
+                                {
+                                    <div style="width: 20%;float:right">
+                                        <t class="unselectable" style="color:white;float:left">HP: </t>
+                                        <input style="width:50%;height:90%;float:left" type="text" @bind="initiative.HP" />
+                                    </div>
+                                }
+                            </div>
+                           
+                        }
+                        else
+                        {
+                        <div class="InitiativeObject" style="border:2px solid black">
+                            <div style="float:left;">
+                                <t class="unselectable" style="color:white">@initiative.Name</t>
+                            </div>
+                            <div class="RemoveInitiative" @onclick="()=>RemoveInitiative(initiative)">
+
+                            </div>
+                            <div style="width: 5%;float:right;">
+                                <t class="unselectable" style="color:white">@initiative.Roll</t>
+                            </div>
+                            @if (initiative.HP != 0)
+                            {
+                                <div style="width: 20%;float:right">
+                                    <t class="unselectable" style="color:white;float:left">HP: </t>
+                                    <input style="width:50%;height:90%;float:left" type="text" @bind="initiative.HP" />
+                                </div>
+                            }
+                        </div>
+
+                        }
+
+
+                    }
+
+                </div>
+                <div style="height:200px; width:auto;float:left;margin:auto">
+                    <div class="SortInitiative" @onclick="()=>SortInitiative()">
+                        <t class="unselectable" style="color:white">Sort</t>
+                    </div>
+                    <div class="NextInitiative" @onclick="()=>NextInitiative()">
+                        <t class="unselectable" style="color:white">Next</t>
+                    </div>
+                    <div class="ClearInitiative" @onclick="()=>ClearInitiative()">
+                        <t class="unselectable" style="color:white">Clear</t>
+                    </div>
+                </div>
+                <div class="AddInitiativeTextArea">
+                    <input style="width:60%;margin-left:6px" type="text" @bind="InitiativeName" />
+                    <input style="width:10%" type="number" @bind="InitiativeRoll" />
+                    <t class="unselectable" style="color:white">HP: </t>
+                    <input style="width:10%" type="number" @bind="InitiativeHP" />
+                </div>
+                <div class="AddInitiative" @onclick="()=>AddInitiative()">
 
                 </div>
             </div>

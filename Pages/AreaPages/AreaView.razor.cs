@@ -36,6 +36,10 @@ namespace DMM.Pages.AreaPages
         Location CurrentLocation { get; set; }
         Area area = new();
         List<Location> LocationList = new();
+        List<Initiative> InitiativeList = new();
+        string InitiativeName = "";
+        int InitiativeRoll = 0;
+        int InitiativeHP = 0;
 
         List<Dice> d100List = new();
         List<Dice> d20List = new();
@@ -191,43 +195,43 @@ namespace DMM.Pages.AreaPages
             if(d100toRoll != 0)
             {
                 await DiceAPICall(d100toRoll, 100);
-                await UpdateModel();
+                UpdateModel();
                 HideCancel = false;
             }
             if (d20toRoll != 0)
             {
                 await DiceAPICall(d20toRoll, 20);
-                await UpdateModel();
+                UpdateModel();
                 HideCancel = false;
             }
             if (d12toRoll != 0)
             {
                 await DiceAPICall(d12toRoll, 12);
-                await UpdateModel();
+                UpdateModel();
                 HideCancel = false;
             }
             if (d10toRoll != 0)
             {
                 await DiceAPICall(d10toRoll, 10);
-                await UpdateModel();
+                UpdateModel();
                 HideCancel = false;
             }
             if (d8toRoll != 0)
             {
                 await DiceAPICall(d8toRoll, 8);
-                await UpdateModel();
+                UpdateModel();
                 HideCancel = false;
             }
             if (d6toRoll != 0)
             {
                 await DiceAPICall(d6toRoll, 6);
-                await UpdateModel();
+                UpdateModel();
                 HideCancel = false;
             }
             if (d4toRoll != 0)
             {
                 await DiceAPICall(d4toRoll, 4);
-                await UpdateModel();
+                UpdateModel();
                 HideCancel = false;
             }
 
@@ -249,7 +253,7 @@ namespace DMM.Pages.AreaPages
 
 
         }
-        public async Task ClearDices()
+        public void ClearDices()
         {
             HideCancel = true;
             d100List = new();
@@ -276,7 +280,7 @@ namespace DMM.Pages.AreaPages
                 Console.WriteLine("Message :{0} ", e.Message);
             }
         }
-        public async Task UpdateModel()
+        public void UpdateModel()
         {
             String[] DiceStrings = Output.Split(",", StringSplitOptions.RemoveEmptyEntries);
 
@@ -340,7 +344,7 @@ namespace DMM.Pages.AreaPages
             d4List = d4List.OrderByDescending(x => x.DiceResult).ToList();
 
         }
-        public async Task RemoveDice(Dice dice)
+        public void RemoveDice(Dice dice)
         {
             switch (dice.DiceType)
             {
@@ -396,6 +400,103 @@ namespace DMM.Pages.AreaPages
         {
             LocationChoosen = false;
         }
+
+        public void AddInitiative()
+        {
+            Initiative i = new();
+            i.Name = InitiativeName;
+            i.Roll = InitiativeRoll;
+            i.HP = InitiativeHP;
+            i.IsCurrent = false;
+
+            if(InitiativeList.Count == 0 || InitiativeList.First().IsCurrent == false)
+            {
+                InitiativeList.Add(i);
+            }
+            else
+            {
+                int index = 0;
+                foreach (var initiative in InitiativeList)
+                {
+                    if(InitiativeList.Max(x => x.Roll) > i.Roll && InitiativeList.Min(x => x.Roll) < i.Roll)
+                    {
+                        index = InitiativeList.FindIndex(x => x == initiative);
+                        if(initiative.Roll > i.Roll && (InitiativeList.Count() < index+2 || InitiativeList[index+1].Roll <= i.Roll))
+                        {
+                            index++;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (InitiativeList.Max(x => x.Roll) <= i.Roll && initiative.Roll == InitiativeList.Max(x => x.Roll))
+                        {
+                            index = InitiativeList.FindIndex(x => x == initiative);
+                            break;
+                        }
+                        if (InitiativeList.Min(x => x.Roll) >= i.Roll && initiative.Roll == InitiativeList.Min(x => x.Roll))
+                        {
+                            index = InitiativeList.FindIndex(x => x == initiative) + 1;
+                            break;
+                        }
+                    } 
+
+                }
+                if(index < InitiativeList.Count && index != 0)
+                {
+                    InitiativeList.Insert(index, i);
+                }
+                else
+                {
+                    InitiativeList.Add(i);
+                }
+                
+            }
+            
+
+            InitiativeName = "";
+            InitiativeRoll = 0;
+        }
+
+        public void RemoveInitiative(Initiative i)
+        {
+            InitiativeList.Remove(i);
+            if (i.IsCurrent == true && InitiativeList.Count > 0)
+            {
+                InitiativeList.First().IsCurrent = true;
+            }
+        }
+
+        public void SortInitiative()
+        {
+            if(InitiativeList.Count > 0)
+            {
+                InitiativeList = InitiativeList.OrderBy(x => x.Roll).Reverse().ToList();
+                foreach (var i in InitiativeList)
+                {
+                    i.IsCurrent = false;
+                }
+                InitiativeList.First().IsCurrent = true;
+            }
+            
+        }
+
+        public void NextInitiative()
+        {
+            if (InitiativeList.Count > 0)
+            {
+                Initiative i = InitiativeList.First();
+                InitiativeList.Remove(i);
+                i.IsCurrent = false;
+                InitiativeList.Add(i);
+                InitiativeList.First().IsCurrent = true;
+            }       
+        }
+
+        public void ClearInitiative()
+        {
+            InitiativeList = new();
+        }
     }
     public class DiceModel
     {
@@ -412,5 +513,16 @@ namespace DMM.Pages.AreaPages
     {
         public int DiceType { get; set; }
         public int DiceResult { get; set; }
+    }
+
+    public class Initiative
+    {
+        public string Name { get; set; }
+        public int Roll { get; set; }
+
+        public int HP { get; set; }
+        public bool IsCurrent { get; set; }
+
+
     }
 }
