@@ -90,13 +90,6 @@ using BlazorInputFile;
 #line hidden
 #nullable disable
 #nullable restore
-#line 12 "D:\repos\DMM\_Imports.razor"
-using Syncfusion.Blazor;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
 #line 2 "D:\repos\DMM\Pages\CampaignPages\CreateCampaign.razor"
 using Blazority;
 
@@ -113,6 +106,13 @@ using System.IO;
 #nullable restore
 #line 4 "D:\repos\DMM\Pages\CampaignPages\CreateCampaign.razor"
 using Syncfusion.Blazor.RichTextEditor;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "D:\repos\DMM\Pages\CampaignPages\CreateCampaign.razor"
+using Syncfusion.Blazor;
 
 #line default
 #line hidden

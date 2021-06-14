@@ -2,26 +2,72 @@
 @using Blazority
 @using System.IO
 @using Syncfusion.Blazor.RichTextEditor
+@using Syncfusion.Blazor
 
-<%@Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %/>
+
+<div style="width:100%;min-height:60px;border-bottom: 2px solid darkred;">
+    <div style="float:left;height:40px;width:90%;min-width:600px;">
+        <h1 style="font-weight:bold;text-align:center;margin:0 auto">Create a Campaign</h1>
+    </div>
+    <div style="width:10%;float:left;">
+        <Button @onclick="() => NavigateToMyCampaigns()">My Campaigns</Button>
+    </div>
+</div>
 
 <br />
-<Button @onclick="()=>NavigateToMyCampaigns()">My Campaigns</Button>
 <Form Model="@textAreaModel">
-    <Textarea Label="Campaign Title" @bind-Value="textAreaModel.InputName" style="resize:none;" />
-    <br />
-    <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="textAreaModel.InputDescription">
-        <Syncfusion.Blazor.RichTextEditor.RichTextEditorToolbarSettings Items="@Tools" Type="ToolbarType.Expand" />
-    </Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
-    <br />
-    <BlazorInputFile.InputFile OnChange="HandleFileSelected" multiple />
-    <br />
+    <div style="float:left;width:100%;height:50%;">
+        <div style="float:left;width:50%;">
+            <h4 style="font-weight:bold;">Campaign Name</h4>
+            <input type="text" placeholder="Enter name..." @bind="@textAreaModel.InputName" style="resize:none; width:400px; height:40px;" />
+        </div>
+        <div style="float:left;width:50%;">
+            <div @onclick="() => AddImageShow()" class="campaignIcon" style="border-radius:3px;">
+                @if (textAreaModel.ImgUpload != null)
+                {
+                    string img = ConvertImage(textAreaModel.ImgUpload);
+                    <img style="height:100%;width:100%" src="@img" alt="Chosen Image" asp-append-version="true" />
+                }
+                else
+                {
+                    <img style="height:100%;width:100%" src="/images/plus.png" alt="Add Image" asp-append-version="true" />
+                }
+            </div>
+        </div>
+    </div>
+    <div style="float:left;width:100%;margin-top:42px;">
+        <h4 style="font-weight:bold;">Description</h4>
+        <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="textAreaModel.InputDescription">
+            <Syncfusion.Blazor.RichTextEditor.RichTextEditorToolbarSettings Items="@Tools" Type="ToolbarType.Expand" />
+        </Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
+    </div>
+</Form>
+
+<Modal Open="AddImageModal" Closable="false">
+    <ModalTitle>Choose Image</ModalTitle>
+    <ModalBody>
+        <div style="overflow:scroll">
+            <div class="drag-drop-zone">
+                <BlazorInputFile.InputFile OnChange="HandleSelection" />
+            </div>
+            @foreach (var icon in IconList)
+            {
+                string img = ConvertImage(icon.Image);
+                <div style="height:100px;width:100px;float:left;margin-top:6px;margin-left:6px;cursor:pointer" @onclick="()=>SelectImage(icon.Image)">
+                    <img style="height:100%;width:100%" src="@img" alt="@icon.Name" asp-append-version="true" />
+                </div>
+            }
+        </div>
+    </ModalBody>
+    <ModalFooter>
+        <Button Variant="Danger" OnClick="e => AddImageModal = false">Abort</Button>
+    </ModalFooter>
+</Modal>
+
+<br />
+<Form Model="textAreaModel">
     <CheckboxContainer>
         <Checkbox Label="Public" @bind-Value="@textAreaModel.IsPublic"></Checkbox>
     </CheckboxContainer>
-
-
+    <Button OnClick="()=>SubmitCampaign()">Create Campaign</Button>
 </Form>
-
-<br />
-<Button OnClick="()=>SubmitCampaign()">Create Campaign</Button>

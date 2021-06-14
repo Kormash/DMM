@@ -27,12 +27,17 @@ namespace DMM.Pages.CampaignPages
         CampaignService CampaignService { get; set; }
         [Inject]
         UserManager<IdentityUser> UserManager { get; set; }
+        [Inject]
+        IconService IconService { get; set; }
 
         //Model for TextAreas
         private TextAreaModel textAreaModel = new TextAreaModel();
 
+
         //Variables for File handling
         IFileListEntry file;
+        bool AddImageModal = false;
+        public List<Icon> IconList = new();
 
         //UserVariables
         private string UserId { get; set; }
@@ -41,6 +46,7 @@ namespace DMM.Pages.CampaignPages
         protected override async Task OnInitializedAsync()
         {
             await SharedMethods.CheckIfLoggedIn(AuthenticationStateProvider, NavigationManager);
+            IconList = await IconService.GetAllIcons();
 
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
@@ -81,22 +87,35 @@ namespace DMM.Pages.CampaignPages
             await CampaignService.InsertMyCampaign(c);
             NavigationManager.NavigateTo("/mycampaigns");
         }
+        public void AddImageShow()
+        {
+            AddImageModal = true;
+        }
+        public string ConvertImage(byte[] Image)
+        {
+            return SharedMethods.ConvertImageToDisplay(Image);
+        }
         public void NavigateToMyCampaigns()
         {
             NavigationManager.NavigateTo("/mycampaigns");
         }
 
-        async Task HandleFileSelected(IFileListEntry[] files)
+        async Task HandleSelection(IFileListEntry[] files)
         {
-            file = files.FirstOrDefault();
-            if (files != null)
+            var file = files.FirstOrDefault();
+            if (file.Name.EndsWith(".jpg") || file.Name.EndsWith(".png"))
             {
                 var ms = new MemoryStream();
                 await file.Data.CopyToAsync(ms);
                 textAreaModel.ImgUpload = ms.ToArray();
+                AddImageModal = false;
             }
         }
-
+        public void SelectImage(byte[] Image)
+        {
+            textAreaModel.ImgUpload = Image;
+            AddImageModal = false;
+        }
         private List<ToolbarItemModel> Tools = new List<ToolbarItemModel>()
         {
             new ToolbarItemModel() { Command = ToolbarCommand.Bold },

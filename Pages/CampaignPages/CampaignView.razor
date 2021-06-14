@@ -5,7 +5,7 @@
 <body>
     <div style="width:100%;height:100px;border-bottom: 2px solid darkred;">
 
-        <div style="height:100%; float:left">
+        <div style="height:90%; float:left;border-radius:3px;">
             @if (Campaign.Image == null)
             {
                 <img style="height:100%" src="/images/d20Red.webp" alt="d20Red" asp-append-version="true" />
@@ -16,8 +16,8 @@
                 <img style="height:100%" src="@img" alt="d20Red" asp-append-version="true" />
             }
         </div>
-        <div>
-            <h1>@Campaign.Name</h1>
+        <div style="float:left;height:40px;">
+            <h1 style="font-weight:bold;text-align:center;margin:0 auto">@Campaign.Name</h1>
         </div>
         <div style="float:right">
             <Button>CLICK ME</Button>
