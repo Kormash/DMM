@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Identity;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Components.Web;
+using Syncfusion.Blazor.RichTextEditor;
+using BlazorInputFile;
+using System.IO;
 
 namespace DMM.Pages.AreaPages
 {
@@ -26,16 +29,49 @@ namespace DMM.Pages.AreaPages
         LocationService locationService { get; set; }
         [Inject]
         AreaService areaService { get; set; }
+        [Inject]
+        NoteService noteService { get; set; }
+        [Inject]
+        MapService mapService { get; set; }
         //Variables
         string Output = "Temp Text";
         string LocationName = "New Location";
         string LocationDescription = "";
+        string NoteTitle = "New Note";
+        string MapTitle = "New Map";
+        MapImageModel MapImageModel = new();
+        SharedMethods SharedMethods = new();
+
+        private List<ToolbarItemModel> Tools = new List<ToolbarItemModel>()
+        {
+            new ToolbarItemModel() { Command = ToolbarCommand.Bold },
+            new ToolbarItemModel() { Command = ToolbarCommand.Italic },
+            new ToolbarItemModel() { Command = ToolbarCommand.Underline },
+            new ToolbarItemModel() { Command = ToolbarCommand.StrikeThrough },
+            new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+            new ToolbarItemModel() { Command = ToolbarCommand.FontName },
+            new ToolbarItemModel() { Command = ToolbarCommand.FontSize },
+            new ToolbarItemModel() { Command = ToolbarCommand.Separator },
+            new ToolbarItemModel() { Command = ToolbarCommand.FontColor },
+            new ToolbarItemModel() { Command = ToolbarCommand.BackgroundColor },
+            new ToolbarItemModel() { Command = ToolbarCommand.CreateTable },
+            new ToolbarItemModel() { Command = ToolbarCommand.CreateLink },
+            new ToolbarItemModel() { Command = ToolbarCommand.Undo },
+            new ToolbarItemModel() { Command = ToolbarCommand.Redo }
+        };
+
+        private MarkupString convertedMarkdownDescription { get; set; }
+
+
 
         bool HideCancel = true;
         bool LocationChoosen = false;
+        bool editDescription = false;
         Location CurrentLocation { get; set; }
         Area area = new();
         List<Location> LocationList = new();
+        List<NoteModel> NoteList = new();
+        List<MapModel> MapList = new();
         List<Initiative> InitiativeList = new();
         string InitiativeName = "";
         int InitiativeRoll = 0;
@@ -74,6 +110,7 @@ namespace DMM.Pages.AreaPages
         {
             LocationList = await locationService.GetLocationByAreaID(AreaId);
             area = await areaService.GetAreaByID(AreaId);
+
         }
 
         public void AddD100()
@@ -391,10 +428,13 @@ namespace DMM.Pages.AreaPages
             LocationList = await locationService.GetLocationByAreaID(AreaId);
             this.StateHasChanged();
         }
-        public void ChooseLocation(Location l)
+        public async Task ChooseLocation(Location l)
         {
             LocationChoosen = true;
             CurrentLocation = l;
+            ConvertToMarkdownDescription();
+            await UpdateNoteList();
+            await UpdateMapList();
         }
         public void Back()
         {
@@ -497,6 +537,167 @@ namespace DMM.Pages.AreaPages
         {
             InitiativeList = new();
         }
+
+        public void EditDescription()
+        {
+            editDescription = true;
+        }
+
+        public void AbortEditDescription(Location currentLocation)
+        {
+            editDescription = false;
+            currentLocation.Description = convertedMarkdownDescription.ToString();
+        }
+
+        public async Task SaveDescription(Location currentLocation)
+        {
+            await locationService.Update(currentLocation);
+            ConvertToMarkdownDescription();
+            editDescription = false;
+        }
+
+        public void ConvertToMarkdownDescription()
+        {
+            // Required Markdig https://www.nuget.org/packages/Markdig/
+            if (CurrentLocation != null)
+            {
+                var html = Markdig.Markdown.ToHtml(CurrentLocation.Description ?? "");
+                convertedMarkdownDescription = (MarkupString)html; // or new MarkupString(html)
+            }
+        }
+
+        public async Task AddNote()
+        {
+            Note n = new();
+            n.Title = NoteTitle;
+            n.LocationID = CurrentLocation.Id;
+
+            NoteTitle = "New Note";
+
+            await noteService.Insert(n);
+            await UpdateNoteList();
+            this.StateHasChanged();
+        }
+
+        public void ChooseNote(NoteModel n)
+        {
+            n.hidden = !n.hidden;
+            ConvertToMarkdownNote(n);
+        }
+
+        public async Task DeleteNote(NoteModel n)
+        {
+            await noteService.DeleteNote(n.note);
+            await UpdateNoteList();
+        }
+
+        public async Task UpdateNoteList()
+        {
+            List<Note> noteList = await noteService.GetNotesByLocationID(CurrentLocation.Id);
+            NoteList = new();
+            foreach(var note in noteList)
+            {
+                NoteModel n = new();
+                n.note = note;
+                NoteList.Add(n);
+            }
+
+        }
+
+        public void ConvertToMarkdownNote(NoteModel noteModel)
+        {
+            // Required Markdig https://www.nuget.org/packages/Markdig/
+            if (CurrentLocation != null)
+            {
+                var html = Markdig.Markdown.ToHtml(noteModel.note.Text ?? "");
+                noteModel.markup = (MarkupString)html; // or new MarkupString(html)
+            }
+        }
+
+        public void EditNote(NoteModel currentNote)
+        {
+            currentNote.edit = true;
+            currentNote.Title = currentNote.note.Title;
+        }
+
+        public void AbortEditNote(NoteModel currentNote)
+        {
+            currentNote.edit = false;
+            currentNote.note.Text = currentNote.markup.ToString();
+        }
+
+        public async Task SaveNote(NoteModel currentNote)
+        {
+            currentNote.note.Title = currentNote.Title;
+            await noteService.Update(currentNote.note);
+            ConvertToMarkdownNote(currentNote);
+            currentNote.edit = false;
+        }
+
+        public async Task AddMap ()
+        {
+            Map m = new();
+            m.Title = MapTitle;
+            m.LocationID = CurrentLocation.Id;
+
+            MapTitle = "New Map";
+
+            await mapService.Insert(m);
+            await UpdateMapList();
+            this.StateHasChanged();
+        }
+
+        public async Task UpdateMapList()
+        {
+            List<Map> mapList = await mapService.GetMapsByLocationID(CurrentLocation.Id);
+            MapList = new();
+            foreach (var map in mapList)
+            {
+                MapModel m = new();
+                m.Map = map;
+                MapList.Add(m);
+            }
+
+        }
+
+        public void ChooseMap(MapModel m)
+        {
+            m.hidden = !m.hidden;
+        }
+
+        public async Task RemoveMap(Map m)
+        {
+            await mapService.DeleteMap(m);
+            await UpdateMapList();
+            this.StateHasChanged();
+        }
+
+        async Task HandleSelection(IFileListEntry[] files)
+        {
+            var file = files.FirstOrDefault();
+            if (file.Name.EndsWith(".jpg") || file.Name.EndsWith(".png"))
+            {
+                var ms = new MemoryStream();
+                await file.Data.CopyToAsync(ms);
+                MapImageModel.Image = ms.ToArray();
+            }
+        }
+
+        public string ConvertImage(byte[] Image)
+        {
+            return SharedMethods.ConvertImageToDisplay(Image);
+        }
+
+        public async Task SaveMap()
+        {
+            Map m = new();
+            m.Image = MapImageModel.Image;
+            m.Title = MapImageModel.Title;
+            m.LocationID = CurrentLocation.Id;
+            await mapService.Insert(m);
+            await UpdateMapList();
+            this.StateHasChanged();
+        }
     }
     public class DiceModel
     {
@@ -524,5 +725,26 @@ namespace DMM.Pages.AreaPages
         public bool IsCurrent { get; set; }
 
 
+    }
+
+    public class NoteModel
+    {
+        public Note note { get; set; }
+        public bool hidden = true;
+        public bool edit = false;
+        public string Title { get; set; }
+        public MarkupString markup { get; set; }
+    }
+
+    public class MapModel
+    {
+        public Map Map { get; set; }
+        public bool hidden = true;
+    }
+
+    public class MapImageModel
+    {
+        public string Title { get; set; }
+        public byte[] Image { get; set; }
     }
 }

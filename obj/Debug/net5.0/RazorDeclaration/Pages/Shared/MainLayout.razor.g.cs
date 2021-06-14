@@ -103,6 +103,15 @@ using Syncfusion.Blazor;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 34 "C:\Users\Erik\source\repos\DMM\Pages\Shared\MainLayout.razor"
+      
+    [CascadingParameter]
+    public bool ConsentGiven { get; set; }
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

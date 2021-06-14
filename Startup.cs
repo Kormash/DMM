@@ -36,6 +36,11 @@ namespace DMM
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(opt =>
+            {
+                opt.ConsentCookie.Name = "ConsentCookie";
+                opt.CheckConsentNeeded = context => true;
+            });
             services.AddDbContextFactory<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -60,6 +65,8 @@ namespace DMM
             services.AddScoped<MonsterTemplateService>();
             services.AddScoped<AreaService>();
             services.AddScoped<LocationService>();
+            services.AddScoped<NoteService>();
+            services.AddScoped<MapService>();
 
             services.AddScoped<ActionTemplate>();
             services.AddScoped<Area>();
@@ -103,6 +110,7 @@ namespace DMM
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCookiePolicy();
 
             app.UseAuthentication();
             app.UseAuthorization();

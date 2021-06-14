@@ -10,8 +10,7 @@ namespace DMM.Models.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; }
-
-        //public picture? Image { get; set; }
+        public byte[] Image { get; set; }
 
         [ForeignKey("Location")]
         public int LocationID { get; set; }

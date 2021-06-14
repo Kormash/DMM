@@ -1,5 +1,6 @@
 ﻿@page "/area/{AreaId:int}"
 @using Blazority
+@using Syncfusion.Blazor.RichTextEditor
 
 <body>
     <div style="width:100%;height:60px;border-bottom: 2px solid darkred;">
@@ -12,8 +13,10 @@
             <div class="LocationWoodBanner">
                 @if (LocationChoosen)
                 {
-                    <t class="LocationBannerText" style="font-family:ModestoBold;">@CurrentLocation.Name</t>
-                    <button @onclick="()=>Back()"></button>
+                    <t class="LocationBannerText" style="font-family:ModestoBold;float:left">@CurrentLocation.Name</t>
+                    <div class="BackButton" @onclick="()=>Back()">
+
+                    </div>
                 }
                 else
                 {
@@ -29,7 +32,7 @@
                     }
                     <div class="LocationStoneButton">
                         <div class="AddLocationTextArea">
-                             <input type="text" @bind="LocationName"/>
+                            <input type="text" @bind="LocationName" />
                         </div>
                         <div class="AddLocation vertical-center" @onclick="()=>AddLocation(LocationName)"></div>
                     </div>
@@ -40,11 +43,103 @@
                         <Tabs>
                             <Tab>
                                 <Header>Map</Header>
-                                <ChildContent><p>This is the contents of tab 1.</p></ChildContent>
+                                <ChildContent>
+                                    @foreach (var mapModel in MapList)
+                                    {
+                                        string mapImg = ConvertImage(mapModel.Map.Image);
+                                        <div class="MapObject" >
+                                            <img style="height:100%;width:100%;" src="@mapImg" alt="Chosen Image" asp-append-version="true" />
+                                            <div class="EditMap" @onclick="()=>ChooseMap(mapModel)">
+
+                                            </div>
+                                        </div>
+                                        @if (mapModel.hidden == false)
+                                        {
+                                        <div class="NoteTextArea">
+                                            <div class="DeleteButton" @onclick="()=>RemoveMap(mapModel.Map)"></div>
+                                            @mapModel.Map.Title
+                                        </div>
+                                        }
+                                    }
+                                    <div class="MapObject">
+                                        <Form Model="@MapImageModel">
+                                            @if (MapImageModel.Image != null)
+                                            {
+                                                string img = ConvertImage(MapImageModel.Image);
+                                                <div class="drag-drop-zone-map-no-image">
+                                                    <BlazorInputFile.InputFile OnChange="HandleSelection" />
+                                                    <img style="height:100%;width:100%;" src="@img" alt="Chosen Image" asp-append-version="true" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="drag-drop-zone-map">
+                                                    <BlazorInputFile.InputFile OnChange="HandleSelection" />
+                                                </div>
+                                            }
+
+                                            <div style="margin-left: auto; margin-right: auto; display:block;width:45%;align-content:center; margin-top:3px">
+                                                <input type="text" @bind="@MapImageModel.Title" style="width:100% " />
+                                            </div>
+                                            @if (MapImageModel.Image != null && MapImageModel.Title != "" && MapImageModel.Title != null)
+                                            {
+                                                <div class="AddMap" @onclick="()=>SaveMap()"></div>
+                                            }
+                                        </Form>
+                                    </div>
+
+                                </ChildContent>
                             </Tab>
                             <Tab>
                                 <Header>Notes</Header>
-                                <ChildContent><p>@CurrentLocation.Description</p></ChildContent>
+                                <ChildContent>
+                                    @foreach (var noteModel in NoteList)
+                                    {
+                                        @if (noteModel.edit == true)
+                                        {
+                                            <div class="NoteStoneButton">
+                                                <div class="AddLocationTextArea">
+                                                    <input type="text" @bind="noteModel.Title" />
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="NoteStoneButton" @onclick="()=>ChooseNote(noteModel)">@noteModel.note.Title</div>
+                                        }
+                                        @if (noteModel.hidden == false)
+                                        {
+                                            <div class="NoteTextArea">
+                                                @if (noteModel.edit == true)
+                                                {
+                                                    <div style="width:100%; height:30px">
+                                                        <div class="SaveButton" @onclick="()=>SaveNote(noteModel)" style="margin-left:3px;float:left"></div>
+                                                        <div class="RevertButton" @onclick="()=>AbortEditNote(noteModel)" style="margin-left:12px;float:left"></div>
+                                                        <div class="DeleteButton" @onclick="()=>DeleteNote(noteModel)" style="margin-left:12px;float:left"></div>
+                                                    </div>
+                                                    <div style="margin-top:6px">
+                                                        <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="@noteModel.note.Text">
+                                                            <Syncfusion.Blazor.RichTextEditor.RichTextEditorToolbarSettings Items="@Tools" Type="ToolbarType.Expand" />
+                                                        </Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="EditButton" style="margin-left:3px;" @onclick="()=>EditNote(noteModel)"></div>
+                                                    <div style="color:white">
+                                                        @noteModel.markup
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                    <div class="NoteStoneButton">
+                                        <div class="AddLocationTextArea">
+                                            <input type="text" @bind="NoteTitle" />
+                                        </div>
+                                        <div class="AddLocation vertical-center" @onclick="()=>AddNote()"></div>
+                                    </div>
+                                </ChildContent>
                             </Tab>
                             <Tab>
                                 <Header>Monsters</Header>
@@ -56,7 +151,25 @@
                             </Tab>
                             <Tab>
                                 <Header>Description</Header>
-                                <ChildContent><p>@CurrentLocation.Description</p></ChildContent>
+
+                                <ChildContent>
+                                    @if (editDescription)
+                                    {
+                                        <div style="width:100%; height:30px">
+                                            <div class="SaveButton" @onclick="()=>SaveDescription(CurrentLocation)" style="float:left;margin-left:3px"></div>
+                                            <div class="RevertButton" @onclick="()=>AbortEditDescription(CurrentLocation)" style="float:left;margin-left:12px"></div>
+                                        </div>
+                                            <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="CurrentLocation.Description">
+                                                <Syncfusion.Blazor.RichTextEditor.RichTextEditorToolbarSettings Items="@Tools" Type="ToolbarType.Expand" />
+                                            </Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
+
+                                            }
+                                            else
+                                            {
+                                            <div class="EditButton" style="margin-left:6px;margin-top:6px" @onclick="()=>EditDescription()"></div>
+                                            @convertedMarkdownDescription
+                                            }
+                                    </ChildContent>
                             </Tab>
                         </Tabs>
                     </div>
@@ -91,28 +204,28 @@
                                     </div>
                                 }
                             </div>
-                           
+
                         }
                         else
                         {
-                        <div class="InitiativeObject" style="border:2px solid black">
-                            <div style="float:left;">
-                                <t class="unselectable" style="color:white">@initiative.Name</t>
-                            </div>
-                            <div class="RemoveInitiative" @onclick="()=>RemoveInitiative(initiative)">
-
-                            </div>
-                            <div style="width: 5%;float:right;">
-                                <t class="unselectable" style="color:white">@initiative.Roll</t>
-                            </div>
-                            @if (initiative.HP != 0)
-                            {
-                                <div style="width: 20%;float:right">
-                                    <t class="unselectable" style="color:white;float:left">HP: </t>
-                                    <input style="width:50%;height:90%;float:left" type="text" @bind="initiative.HP" />
+                            <div class="InitiativeObject" style="border:2px solid black">
+                                <div style="float:left;">
+                                    <t class="unselectable" style="color:white">@initiative.Name</t>
                                 </div>
-                            }
-                        </div>
+                                <div class="RemoveInitiative" @onclick="()=>RemoveInitiative(initiative)">
+
+                                </div>
+                                <div style="width: 5%;float:right;">
+                                    <t class="unselectable" style="color:white">@initiative.Roll</t>
+                                </div>
+                                @if (initiative.HP != 0)
+                                {
+                                    <div style="width: 20%;float:right">
+                                        <t class="unselectable" style="color:white;float:left">HP: </t>
+                                        <input style="width:50%;height:90%;float:left" type="text" @bind="initiative.HP" />
+                                    </div>
+                                }
+                            </div>
 
                         }
 

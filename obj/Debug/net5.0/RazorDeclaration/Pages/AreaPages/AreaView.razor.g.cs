@@ -103,6 +103,13 @@ using Blazority;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\Erik\source\repos\DMM\Pages\AreaPages\AreaView.razor"
+using Syncfusion.Blazor.RichTextEditor;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/area/{AreaId:int}")]
     public partial class AreaView : Microsoft.AspNetCore.Components.ComponentBase
     {

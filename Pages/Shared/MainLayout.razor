@@ -14,7 +14,24 @@
             <LoginDisplay />
         </div>
     </div>
+    @if (!ConsentGiven)
+    {
+        <div style="width:99%;border:2px solid black;border-radius:6px;margin:auto;margin-top:3px;">
+            <div style="margin:auto;width:90%;">
+                This site uses technology such as cookies to store and collect information from your browser to personalize content and ads, provide social media features, and analyze our traffic.
+                For additional information, please select "LEARN MORE." Note that if you do not accept, you may see ads that are less relevant to you and certain features of the site may not work as intended. You can change your mind and revisit your consent choices at any time by utilizing the "clear cookies" functionality in your browser (this will prompt us to ask for consent again when you next visit our website).
+                <br />
+                <a class="btn btn-outline-secondary" style="margin-right:6px;" href="/cookie/consent">Learn More</a>
+                <a class="btn btn-outline-primary" style="margin-right:6px;" href="/cookie/consent">Accept</a>
+            </div>
+        </div>
+    }
     <div class="content px-4">
         @Body
     </div>
 </div>
+
+@code{
+    [CascadingParameter]
+    public bool ConsentGiven { get; set; }
+}

@@ -103,6 +103,15 @@ using Syncfusion.Blazor;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 18 "C:\Users\Erik\source\repos\DMM\App.razor"
+      
+    [Parameter]
+    public bool ConsentGiven { get; set; }
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

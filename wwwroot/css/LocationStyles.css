@@ -15,6 +15,7 @@
 
 .LocationBannerText {
     color: white;
+    margin-left:20px;
     vertical-align: middle;
     text-align: center;
     line-height: 50px;
@@ -89,3 +90,92 @@
 .AddLocation:hover {
     background-image: url(../images/Icons/AddHover.png);
 }
+
+.NoteStoneButton {
+    border: 2px solid black;
+    border-radius: 2px;
+    height: 50px;
+    width: 90%;
+    margin-top: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    background-image: url(../images/SlateStone.png);
+    background-size: 100% 100%;
+}
+
+.NoteTextArea {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    border-radius: 2px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    background-image: url(../images/parchment.png);
+    background-size: 100% 100%;
+}
+
+.BackButton {
+    width: 30px;
+    height: 30px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 6px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Icons/ReturnArrow.png);
+}
+
+    .BackButton:hover {
+        background-image: url(../images/Icons/ReturnArrowHover.png);
+    }
+
+.EditButton {
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Icons/Pen.png);
+}
+
+    .EditButton:hover {
+        background-image: url(../images/Icons/PenHover.png);
+    }
+
+.SaveButton {
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Icons/Save.png);
+}
+
+    .SaveButton:hover {
+        background-image: url(../images/Icons/SaveHover.png);
+    }
+
+.RevertButton {
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Icons/Revert.png);
+}
+
+    .RevertButton:hover {
+        background-image: url(../images/Icons/RevertHover.png);
+    }
+
+.DeleteButton {
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Icons/Delete.png);
+}
+
+    .DeleteButton:hover {
+        background-image: url(../images/Icons/DeleteHover.png);
+    }
