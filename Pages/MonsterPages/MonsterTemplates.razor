@@ -15,9 +15,11 @@
 
         @foreach (var m in MonsterList)
         {
-            <div class="MonsterDivSize hoverOutline" style="border:2px solid green" @onclick="() => MonsterDetails(m)">
+            <div class="MonsterDivSize hoverOutline" @onclick="() => MonsterDetails(m)">
                 <div style="margin-top:6px;">
-                    <b style="color:black;">@m.name</b>
+                    <div>
+                        <b style="color:black;">@m.name</b>
+                    </div>
                 </div>
             </div>
             <div hidden="@m.hidden" class="MonsterDivContainer">
@@ -177,5 +179,3 @@
     </div>
 
 </body>
-
-

@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Syncfusion.Blazor.RichTextEditor;
 using BlazorInputFile;
 using System.IO;
+using DMM.Pages.Shared;
 
 namespace DMM.Pages.AreaPages
 {
@@ -33,6 +34,9 @@ namespace DMM.Pages.AreaPages
         NoteService noteService { get; set; }
         [Inject]
         MapService mapService { get; set; }
+        [Inject]
+        MonsterService monsterService { get; set; }
+
         //Variables
         string Output = "Temp Text";
         string LocationName = "New Location";
@@ -41,6 +45,8 @@ namespace DMM.Pages.AreaPages
         string MapTitle = "New Map";
         MapImageModel MapImageModel = new();
         SharedMethods SharedMethods = new();
+
+        public List<MonsterTemplate> monsterAddList = new();
 
         private List<ToolbarItemModel> Tools = new List<ToolbarItemModel>()
         {
@@ -76,6 +82,7 @@ namespace DMM.Pages.AreaPages
         string InitiativeName = "";
         int InitiativeRoll = 0;
         int InitiativeHP = 0;
+        FocusObject focusObject = new();
 
         List<Dice> d100List = new();
         List<Dice> d20List = new();
@@ -102,6 +109,8 @@ namespace DMM.Pages.AreaPages
         bool HideD4Count = true;
 
         DiceModel diceModel = new();
+        public bool MonsterModal = false;
+        List<MonsterObject> MonsterList = new();
 
         [Parameter]
         public int AreaId { get; set; }
@@ -110,6 +119,7 @@ namespace DMM.Pages.AreaPages
         {
             LocationList = await locationService.GetLocationByAreaID(AreaId);
             area = await areaService.GetAreaByID(AreaId);
+            
 
         }
 
@@ -435,6 +445,20 @@ namespace DMM.Pages.AreaPages
             ConvertToMarkdownDescription();
             await UpdateNoteList();
             await UpdateMapList();
+            await UpdateMonsterList();
+            
+        }
+
+        public async Task UpdateMonsterList()
+        {
+            MonsterList = new();
+            var mList = await monsterService.GetMonstersByLocationId(CurrentLocation.Id);
+            foreach(var m in mList)
+            {
+                MonsterObject toAdd = new();
+                toAdd.Monster = m;
+                MonsterList.Add(toAdd);
+            }
         }
         public void Back()
         {
@@ -698,6 +722,50 @@ namespace DMM.Pages.AreaPages
             await UpdateMapList();
             this.StateHasChanged();
         }
+
+        public void FocusMap(Map m)
+        {
+            focusObject = new();
+            focusObject.Title = m.Title;
+            focusObject.Image = m.Image;
+        }
+
+        public void AddMonster()
+        {
+            MonsterModal = true;
+        }
+
+        public async Task SaveMonster()
+        {
+            await UpdateMonsterList();
+            this.StateHasChanged();
+            MonsterModal = false;
+        }
+
+        public int GetModifier(int stat)
+        {
+            double statDouble = stat;
+            return (int)Math.Floor((statDouble - 10) / 2);
+        }
+
+        public void ShowMonster(MonsterObject m)
+        {
+            m.hidden = !m.hidden;
+        }
+
+        public void SelectMonster(MonsterObject m)
+        {
+            focusObject = new();
+            focusObject.Title = m.Monster.Name;
+            focusObject.MonsterObj = m;
+        }
+
+        public async Task DeleteMonster(MonsterObject m)
+        {
+            await monsterService.DeleteMonster(m.Monster);
+            await UpdateMonsterList();
+            this.StateHasChanged();
+        }
     }
     public class DiceModel
     {
@@ -746,5 +814,21 @@ namespace DMM.Pages.AreaPages
     {
         public string Title { get; set; }
         public byte[] Image { get; set; }
+    }
+
+    public class FocusObject
+    {
+        public string Title { get; set; }
+        public byte[] Image { get; set; }
+        public MonsterObject MonsterObj { get; set; }
+    }
+
+    public class MonsterObject
+    {
+        public Monster Monster { get; set; }
+        public bool hidden = true;
+        public List<ActionModel> AbilityList = new();
+        public List<ActionModel> ActionList = new();
+        public List<ActionModel> LegendaryActionList = new();
     }
 }

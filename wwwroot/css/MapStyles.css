@@ -6,7 +6,6 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 3px;
-    border: 2px solid green;
     background-image: url('/images/SlateStone.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -112,4 +111,18 @@
 
     .EditMap:hover {
         background-image: url(../images/Icons/PenHover.png);
+    }
+
+.FocusMap {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 6px;
+    margin-left: 6px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Icons/MagnifyingGlass.png);
+}
+
+    .FocusMap:hover {
+        background-image: url(../images/Icons/MagnifyingGlassHover.png);
     }

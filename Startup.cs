@@ -1,6 +1,7 @@
 using DMM.Areas.Identity;
 using DMM.Data;
 using DMM.Models.Entities;
+using DMM.Pages.Shared;
 using DMM.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -83,7 +84,7 @@ namespace DMM
             services.AddScoped<Note>();
             services.AddScoped<Player>();
             services.AddScoped<Trait>();
-            services.AddScoped<TraitTemplate>();
+            services.AddScoped<TraitTemplate>(); 
 
             services.AddTransient<UserManager<IdentityUser>>();
 

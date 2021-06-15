@@ -13,6 +13,20 @@
     margin-bottom: 12px;
 }
 
+.FocusWoodTray {
+    border: 3px solid black;
+    min-height: 500px;
+    margin-left:12px;
+    padding-bottom:6px;
+    width: 500px;
+    background-image: url(../images/diceTrayWood.png);
+    background-size: 101% 101%;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+    float: left;
+    margin-bottom: 12px;
+}
+
 .LocationBannerText {
     color: white;
     margin-left:20px;

@@ -32,34 +32,12 @@ namespace DMM.Services
 
             return MyMonsters.ToList();
         }
-        public async Task<Campaign> GetCampaignByID(int Id)
-        {
-            using var context = dbContextFactory.CreateDbContext();
-            var dbSet = context.Set<Campaign>();
 
-            return await dbSet.FindAsync(Id);
-        }
-        
-        public async Task UpdateMyCampaign(Campaign p)
+        public async Task DeleteMonster(Monster m)
         {
             await using var context = dbContextFactory.CreateDbContext();
-            var q1 = context.Campaigns.SingleOrDefault(x => x.Id == p.Id);
-            q1.Name = p.Name;
-            q1.Description = p.Description;
-            context.Update(q1);
-            context.SaveChanges();
-        }
-        public async Task DeleteMyCampaign(Campaign p)
-        {
-            await using var context = dbContextFactory.CreateDbContext();
-            var q1 = context.Campaigns.SingleOrDefault(x => x.Id == p.Id);
+            var q1 = context.Monsters.SingleOrDefault(x => x.Id == m.Id);
             context.Remove(q1);
-            context.SaveChanges();
-        }
-        public async Task InsertMyCampaign(Campaign p)
-        {
-            await using var context = dbContextFactory.CreateDbContext();
-            context.Add(p);
             context.SaveChanges();
         }
 

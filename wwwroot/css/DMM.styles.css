@@ -22,9 +22,9 @@
 }
 
 .MonsterTextArialRegular {
-    font-family:Arial;
-    color:#58170D;
-    margin:0;
+    font-family: Arial;
+    color: #58170D;
+    margin: 0;
 }
 
 .CampaignDivSize {
@@ -37,18 +37,43 @@
     margin-top: 5%;
 }
 
-.CampaignDivSize.hoverOutline:hover {
-    box-shadow: 0 0 3pt 2pt darkgray;
-}
+    .CampaignDivSize.hoverOutline:hover {
+        box-shadow: 0 0 3pt 2pt darkgray;
+    }
 
 .MonsterDivSize {
-    background-color: lightgray;
-    border-radius: 10px;
+    background-color: #F7F7F7;
+    border-radius: 3px;
+    border: 2px solid gray;
     height: 40px;
     width: 90%;
-    min-width:400px;
+    min-width: 400px;
     float: left;
-    margin:auto;
+    margin: auto;
+    margin-top: 12px;
+}
+
+.MonsterDivSizeAdd {
+    background-color: #F7F7F7;
+    border-radius: 3px;
+    border: 2px solid gray;
+    height: 40px;
+    width: 70%;
+    min-width: 400px;
+    float: left;
+    margin: auto;
+    margin-top: 12px;
+}
+
+.AddMonster {
+    background-color: darkblue;
+    border-radius: 3px;
+    border: 2px solid gray;
+    height: 40px;
+    width: 10%;
+    min-width: 50px;
+    float: left;
+    margin: auto;
     margin-top: 12px;
 }
 
@@ -63,6 +88,7 @@
 
 .MonsterDivSize.hoverOutline:hover {
     box-shadow: 0 0 3pt 2pt darkgray;
+    background-color: lightgray;
 }
 
 .MonsterDivTop {
@@ -71,7 +97,7 @@
     border: 1px solid black;
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 24px;
+    margin-top: 6px;
     border-radius: 2px;
 }
 
@@ -199,12 +225,12 @@
     }
 
 .campaignIcon {
-    width:100px;
-    height:100px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:6px;
-    display:block;
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6px;
+    display: block;
 }
 
     .campaignIcon:hover {
@@ -235,3 +261,35 @@
     .AreaDivSize.hoverOutline:hover {
         box-shadow: 0 0 3pt 2pt darkgray;
     }
+
+MonsterButtons {
+    width: 100%;
+    margin-top:6px;
+}
+
+.SelectMonster {
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    text-align: center;
+    margin-left:24px;
+    background-image: url(../images/Icons/MagnifyingGlass.png);
+    float: left;
+}
+    .SelectMonster:hover {
+        background-image: url(../images/Icons/MagnifyingGlassHover.png);
+    }
+
+.DeleteMonster {
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    text-align: center;
+    margin-left: 6px;
+    background-image: url(../images/Icons/Delete.png);
+    float: left;
+}
+    .DeleteMonster:hover {
+        background-image: url(../images/Icons/DeleteHover.png);
+    }
+
