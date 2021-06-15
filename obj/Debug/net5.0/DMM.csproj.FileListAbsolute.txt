@@ -534,3 +534,7 @@ D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\AreaPages\AreaView.razor.g.
 D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\AdminPages\Administration.razor.g.cs
 D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\AreaPages\AreaView.razor.g.cs
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\DMM.csprojAssemblyReference.cache
+D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\AdminPages\PrivacyPolicy.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\AdminPages\PrivacyPolicy.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\Shared\PrivacyDropDown.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\Shared\PrivacyDropDown.razor.g.cs

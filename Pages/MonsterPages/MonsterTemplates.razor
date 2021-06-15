@@ -2,174 +2,177 @@
 @using Blazority
 
 <body>
-    <div style="width:100%;height:60px;border-bottom: 2px solid darkred;">
-        <div style="float:right;">
+    <div style="width:100%;min-height:60px;border-bottom: 2px solid darkred;">
+        <div style="float:left;height:40px;width:90%;min-width:600px;">
+            <h1 style="font-weight:bold;margin:0 auto">Monsters</h1>
+        </div>
+        <div style="width:10%;float:left;">
             <Button>Create Monster</Button>
         </div>
     </div>
 
     <div style="padding-top:12px; margin:auto; width:80%;">
 
-        @foreach(var m in MonsterList)
+        @foreach (var m in MonsterList)
         {
-        <div class="MonsterDivSize hoverOutline" style="border:2px solid green" @onclick="() => MonsterDetails(m)">
-            <div style="margin-top:6px;">
-                <b style="color:black;">@m.name</b>
+            <div class="MonsterDivSize hoverOutline" style="border:2px solid green" @onclick="() => MonsterDetails(m)">
+                <div style="margin-top:6px;">
+                    <b style="color:black;">@m.name</b>
+                </div>
             </div>
-        </div>
-        <div hidden="@m.hidden" class="MonsterDivContainer">
-            <div class="MonsterDivTop"></div>
-            <div style="background-image: url('/images/parchment.png');margin-right:24px;margin-left:24px;">
-                <div class="MonsterChunkDiv">
-                    <h1 style="letter-spacing:1px;font-family:ModestoBold;font-variant:small-caps;color:#822000;margin:0">@m.Monster.Name</h1>
-                    <p style="font-family:Cambria;color:black;margin:0">
-                        <i>
-                            @m.Monster.Size
-                            @m.Monster.Type
-                            @if (m.Monster.SubType != null && m.Monster.SubType != "")
-                            {<i> (@m.Monster.SubType )</i>}
-                            , @m.Monster.Alignment
-                        </i>
-                    </p>
-                </div>
-                <div class="MonsterChunkDiv">
-                    <p class="MonsterTextArialRegular"> <b>Armor Class </b>@m.Monster.ArmorClass</p>
-                    <p class="MonsterTextArialRegular"> <b>Hit Points </b>@m.Monster.HitPoints (@m.Monster.HitDice)</p>
-                    <p class="MonsterTextArialRegular"> <b>Speed </b>@m.Monster.Speed</p>
-                </div>
-                <div class="MonsterChunkDiv">
-                    <table style="width:100%">
-                        <tr>
-                            <th>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> STR</h5>
-                            </th>
-                            <th>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> DEX</h5>
-                            </th>
-                            <th>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> CON</h5>
-                            </th>
-                            <th>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> INT</h5>
-                            </th>
-                            <th>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> WIS</h5>
-                            </th>
-                            <th>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> CHA</h5>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
-                                    @m.Monster.Strength (@if (GetModifier(m.Monster.Strength) >= 0)
-                                    {<t>+</t>}@GetModifier(m.Monster.Strength))
-                                </h5>
-                            </td>
-                            <td>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
-                                    @m.Monster.Dexterity (@if (GetModifier(m.Monster.Dexterity) >= 0)
-                                    {<t>+</t>}@GetModifier(m.Monster.Dexterity))
-                                </h5>
-                            </td>
-                            <td>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
-                                    @m.Monster.Constitution (@if (GetModifier(m.Monster.Constitution) >= 0)
-                                    {<t>+</t>}@GetModifier(m.Monster.Constitution))
-                                </h5>
-                            </td>
-                            <td>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
-                                    @m.Monster.Intelligence (@if (GetModifier(m.Monster.Intelligence) >= 0)
-                                    {<t>+</t>}@GetModifier(m.Monster.Intelligence))
-                                </h5>
-                            </td>
-                            <td>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
-                                    @m.Monster.Wisdom (@if (GetModifier(m.Monster.Wisdom) >= 0)
-                                    {<t>+</t>}@GetModifier(m.Monster.Wisdom))
-                                </h5>
-                            </td>
-                            <td>
-                                <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
-                                    @m.Monster.Charisma (@if (GetModifier(m.Monster.Charisma) >= 0)
-                                    {<t>+</t>}@GetModifier(m.Monster.Charisma))
-                                </h5>
-                            </td>
-                        </tr>
-                    </table>
+            <div hidden="@m.hidden" class="MonsterDivContainer">
+                <div class="MonsterDivTop"></div>
+                <div style="background-image: url('/images/parchment.png');margin-right:24px;margin-left:24px;">
+                    <div class="MonsterChunkDiv">
+                        <h1 style="letter-spacing:1px;font-family:ModestoBold;font-variant:small-caps;color:#822000;margin:0">@m.Monster.Name</h1>
+                        <p style="font-family:Cambria;color:black;margin:0">
+                            <i>
+                                @m.Monster.Size
+                                @m.Monster.Type
+                                @if (m.Monster.SubType != null && m.Monster.SubType != "")
+                                {<i> (@m.Monster.SubType )</i>}
+                                , @m.Monster.Alignment
+                            </i>
+                        </p>
+                    </div>
+                    <div class="MonsterChunkDiv">
+                        <p class="MonsterTextArialRegular"> <b>Armor Class </b>@m.Monster.ArmorClass</p>
+                        <p class="MonsterTextArialRegular"> <b>Hit Points </b>@m.Monster.HitPoints (@m.Monster.HitDice)</p>
+                        <p class="MonsterTextArialRegular"> <b>Speed </b>@m.Monster.Speed</p>
+                    </div>
+                    <div class="MonsterChunkDiv">
+                        <table style="width:100%">
+                            <tr>
+                                <th>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> STR</h5>
+                                </th>
+                                <th>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> DEX</h5>
+                                </th>
+                                <th>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> CON</h5>
+                                </th>
+                                <th>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> INT</h5>
+                                </th>
+                                <th>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> WIS</h5>
+                                </th>
+                                <th>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center"> CHA</h5>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
+                                        @m.Monster.Strength (@if (GetModifier(m.Monster.Strength) >= 0)
+                                        {<t>+</t>}@GetModifier(m.Monster.Strength))
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
+                                        @m.Monster.Dexterity (@if (GetModifier(m.Monster.Dexterity) >= 0)
+                                        {<t>+</t>}@GetModifier(m.Monster.Dexterity))
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
+                                        @m.Monster.Constitution (@if (GetModifier(m.Monster.Constitution) >= 0)
+                                        {<t>+</t>}@GetModifier(m.Monster.Constitution))
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
+                                        @m.Monster.Intelligence (@if (GetModifier(m.Monster.Intelligence) >= 0)
+                                        {<t>+</t>}@GetModifier(m.Monster.Intelligence))
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
+                                        @m.Monster.Wisdom (@if (GetModifier(m.Monster.Wisdom) >= 0)
+                                        {<t>+</t>}@GetModifier(m.Monster.Wisdom))
+                                    </h5>
+                                </td>
+                                <td>
+                                    <h5 style="font-family:ModestoRegular;color:#58170D;margin:0;text-align:center">
+                                        @m.Monster.Charisma (@if (GetModifier(m.Monster.Charisma) >= 0)
+                                        {<t>+</t>}@GetModifier(m.Monster.Charisma))
+                                    </h5>
+                                </td>
+                            </tr>
+                        </table>
 
+                    </div>
+                    <div class="MonsterChunkDiv">
+                        @if (m.Monster.SavingThrows != "")
+                        {
+                            <p class="MonsterTextArialRegular"><b>Saving Throws </b><t style="font-family:ModestoRegular;color:#58170D;margin:0;text-transform:capitalize">@m.Monster.SavingThrows</t> </p>
+                        }
+                        @if (m.Monster.Skills != "")
+                        {
+                            <p class="MonsterTextArialRegular"><b>Skills </b><t style="font-family:ModestoRegular;color:#58170D;margin:0;text-transform:capitalize">@m.Monster.Skills</t> </p>
+                        }
+                        @if (m.Monster.DamageVulnerabilities != "")
+                        {
+                            <p class="MonsterTextArialRegular"><b>Damage Vulnerabilities </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.DamageVulnerabilities</t> </p>
+                        }
+                        @if (m.Monster.DamageResistances != "")
+                        {
+                            <p class="MonsterTextArialRegular"><b>Damage Resistances </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.DamageResistances</t> </p>
+                        }
+                        @if (m.Monster.DamageImmunities != "")
+                        {
+                            <p class="MonsterTextArialRegular"><b>Damage Immunities </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.DamageImmunities</t> </p>
+                        }
+                        @if (m.Monster.ConditionImmunities != "")
+                        {
+                            <p class="MonsterTextArialRegular"><b>Condition Immunities </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.ConditionImmunities</t> </p>
+                        }
+                        @if (m.Monster.Senses != "")
+                        {
+                            <p class="MonsterTextArialRegular"><b>Senses </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.Senses</t> </p>
+                        }
+                        @if (m.Monster.Languages != "")
+                        {
+                            <p class="MonsterTextArialRegular"><b>Languages </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.Languages</t> </p>
+                        }
+                        @if (m.Monster.Challange != "")
+                        {
+                            <p class="MonsterTextArialRegular"><b>Challenge </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.Challange</t> </p>
+                        }
+                    </div>
+                    @if (m.AbilityList.Count() != 0)
+                    {
+                        <div class="MonsterChunkDivMiddle">
+                            @foreach (var a in m.AbilityList)
+                            {
+                                <p style="font-family:Georgia;color:black;margin:0;"><i><b>@a.Name<t>.</t></b></i> <t style="font-family:Georgia;color:black;margin:0;">@a.Description</t> </p>
+                            }
+                        </div>
+                    }
+                    @if (m.ActionList.Count() != 0)
+                    {
+                        <div class="MonsterChunkDivMiddle">
+                            <div class="MonsterChunkTitle"><h5 style="letter-spacing:1px;font-family:Arial;font-variant:small-caps;color:#822000;margin:0">Actions</h5></div>
+                            @foreach (var a in m.ActionList)
+                            {
+                                <p style="font-family:Georgia;color:black;margin:0;"><i><b>@a.Name<t>.</t></b></i> <t style="font-family:Georgia;color:black;margin:0;">@a.Description</t> </p>
+                            }
+                        </div>
+                    }
+                    @if (m.LegendaryActionList.Count() != 0)
+                    {
+                        <div class="MonsterChunkDivMiddle">
+                            <div class="MonsterChunkTitle"><h5 style="letter-spacing:1px;font-family:Arial;font-variant:small-caps;color:#822000;margin:0">Legendary Actions</h5></div>
+                            @foreach (var a in m.LegendaryActionList)
+                            {
+                                <p style="font-family:Georgia;color:black;margin:0;"><i><b>@a.Name<t>.</t></b></i> <t style="font-family:Georgia;color:black;margin:0;">@a.Description</t> </p>
+                            }
+                        </div>
+                    }
                 </div>
-                <div class="MonsterChunkDiv">
-                    @if (m.Monster.SavingThrows != "")
-                    {
-                        <p class="MonsterTextArialRegular"><b>Saving Throws </b><t style="font-family:ModestoRegular;color:#58170D;margin:0;text-transform:capitalize">@m.Monster.SavingThrows</t> </p>
-                    }
-                    @if (m.Monster.Skills != "")
-                    {
-                        <p class="MonsterTextArialRegular"><b>Skills </b><t style="font-family:ModestoRegular;color:#58170D;margin:0;text-transform:capitalize">@m.Monster.Skills</t> </p>
-                    }
-                    @if (m.Monster.DamageVulnerabilities != "")
-                    {
-                        <p class="MonsterTextArialRegular"><b>Damage Vulnerabilities </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.DamageVulnerabilities</t> </p>
-                    }
-                    @if (m.Monster.DamageResistances != "")
-                    {
-                        <p class="MonsterTextArialRegular"><b>Damage Resistances </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.DamageResistances</t> </p>
-                    }
-                    @if (m.Monster.DamageImmunities != "")
-                    {
-                        <p class="MonsterTextArialRegular"><b>Damage Immunities </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.DamageImmunities</t> </p>
-                    }
-                    @if (m.Monster.ConditionImmunities != "")
-                    {
-                        <p class="MonsterTextArialRegular"><b>Condition Immunities </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.ConditionImmunities</t> </p>
-                    }
-                    @if (m.Monster.Senses != "")
-                    {
-                        <p class="MonsterTextArialRegular"><b>Senses </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.Senses</t> </p>
-                    }
-                    @if (m.Monster.Languages != "")
-                    {
-                        <p class="MonsterTextArialRegular"><b>Languages </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.Languages</t> </p>
-                    }
-                    @if (m.Monster.Challange != "")
-                    {
-                        <p class="MonsterTextArialRegular"><b>Challenge </b><t class="MonsterTextArialRegular" style="text-transform:capitalize">@m.Monster.Challange</t> </p>
-                    }
-                </div>
-                @if (m.AbilityList.Count() != 0)
-                {
-                    <div class="MonsterChunkDivMiddle">
-                        @foreach (var a in m.AbilityList)
-                        {
-                            <p style="font-family:Georgia;color:black;margin:0;"><i><b>@a.Name<t>.</t></b></i> <t style="font-family:Georgia;color:black;margin:0;">@a.Description</t> </p>
-                        }
-                    </div>
-                }
-                @if (m.ActionList.Count() != 0)
-                {
-                    <div class="MonsterChunkDivMiddle">
-                        <div class="MonsterChunkTitle"><h5 style="letter-spacing:1px;font-family:Arial;font-variant:small-caps;color:#822000;margin:0">Actions</h5></div>
-                        @foreach (var a in m.ActionList)
-                        {
-                            <p style="font-family:Georgia;color:black;margin:0;"><i><b>@a.Name<t>.</t></b></i> <t style="font-family:Georgia;color:black;margin:0;">@a.Description</t> </p>
-                        }
-                    </div>
-                }
-                @if (m.LegendaryActionList.Count() != 0)
-                {
-                    <div class="MonsterChunkDivMiddle">
-                        <div class="MonsterChunkTitle"><h5 style="letter-spacing:1px;font-family:Arial;font-variant:small-caps;color:#822000;margin:0">Legendary Actions</h5></div>
-                        @foreach (var a in m.LegendaryActionList)
-                        {
-                            <p style="font-family:Georgia;color:black;margin:0;"><i><b>@a.Name<t>.</t></b></i> <t style="font-family:Georgia;color:black;margin:0;">@a.Description</t> </p>
-                        }
-                    </div>
-                }
-            </div> 
-            <div class="MonsterDivBottom"></div>
-        </div>
+                <div class="MonsterDivBottom"></div>
+            </div>
         }
     </div>
 

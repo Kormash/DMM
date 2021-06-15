@@ -2,8 +2,11 @@
 @using Blazority
 
 <body>
-    <div style="width:100%;height:60px;border-bottom: 2px solid darkred;">
-        <div style="float:right;">
+    <div style="width:100%;min-height:60px;border-bottom: 2px solid darkred;">
+        <div style="float:left;height:40px;width:90%;min-width:600px;">
+            <h1 style="font-weight:bold;margin:0 auto">My Campaigns</h1>
+        </div>
+        <div style="width:10%;float:left;">
             <Button @onclick="() => NavigateToCreateCampaign()">Create Campaign</Button>
         </div>
     </div>

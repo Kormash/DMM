@@ -3,37 +3,24 @@
 @using Syncfusion.Blazor 
 
 <body>
-    <div style="width:100%;height:100px;border-bottom: 2px solid darkred;">
+        <div style="width:100%;min-height:60px;border-bottom: 2px solid darkred;">
+            <div style="float:left;height:40px;width:90%;min-width:600px;">
+                <h1 style="font-weight:bold;margin:0 auto">@Campaign.Name</h1>
+            </div>
 
-        <div style="height:100%; float:left">
-            @if (Campaign.Image == null)
-            {
-                <img style="height:100%" src="/images/d20Red.webp" alt="d20Red" asp-append-version="true" />
-            }
-            else
-            {
-                string img = SharedMethods.ConvertImageToDisplay(Campaign.Image);
-                <img style="height:100%" src="@img" alt="d20Red" asp-append-version="true" />
-            }
         </div>
-        <div>
-            <h1>@Campaign.Name</h1>
-        </div>
-        <div style="float:right">
-            <Button>CLICK ME</Button>
-        </div>
-
+    <br />
+    <div style="margin-top:12px;width:90%;margin:auto;border:2px solid darkgray;border-radius:6px;">
+        @if (CanEdit)
+        {
+            <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="@campaignModel.Description" SaveInterval="1"></Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
+            <Button @onclick="() => SaveCampaign()">SAVE</Button>
+        }
+        else
+        {
+            @convertedMarkdown
+        }
     </div>
-
-    @if (CanEdit)
-    {
-        <Syncfusion.Blazor.RichTextEditor.SfRichTextEditor @bind-Value="@campaignModel.Description" SaveInterval="1"></Syncfusion.Blazor.RichTextEditor.SfRichTextEditor>
-        <Button @onclick="() => SaveCampaign()">SAVE</Button>
-    }
-    else
-    {
-        @convertedMarkdown
-    }
 
 <div style="padding-top:12px;">
     @foreach (var a in AreaList)

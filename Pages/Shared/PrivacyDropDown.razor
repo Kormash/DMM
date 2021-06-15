@@ -1,0 +1,21 @@
+﻿@using Blazority
+
+<AuthorizeView>
+        <Authorized>
+            <div class="dropdown">
+                <button class="dropbtn">Privacy</button>
+                <div class="dropdown-content">
+                    <a href="/PrivacyPolicy">Privacy Policy</a>
+                    <a href="Identity/Account/Manage/PersonalData">GDPR</a>
+                </div>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="dropdown">
+                <button class="dropbtn">Community</button>
+                <div class="dropdown-content">
+                    <a href="/PrivacyPolicy">Privacy Policy</a>
+                </div>
+            </div>
+        </NotAuthorized>
+</AuthorizeView>
