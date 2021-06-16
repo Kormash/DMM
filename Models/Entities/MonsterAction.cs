@@ -11,6 +11,7 @@ namespace DMM.Models.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool IsLegendary { get; set; }
         public string DamageType { get; set; }
         public int ToHitDiceMod { get; set; }
         public int OnHitDiceType { get; set; }

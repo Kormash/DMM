@@ -22,61 +22,64 @@
         }
     </div>
 
-<div style="padding-top:12px;">
-    @foreach (var a in AreaList)
-    {
-        <div class="AreaDivSize hoverOutline" style="text-align:center;" @onclick="() => NavigateToArea(a.Id)">
-            <div>
-                @if (a.Image == null)
-                {
-                    <img class="iconImageSize" src="/images/d20Red.webp" alt="d20Red" asp-append-version="true" />
-                }
-                else
-                {
-                    string img = SharedMethods.ConvertImageToDisplay(a.Image);
-                    <img class="iconImageSize" src="@img" alt="d20Red" asp-append-version="true" />
-                }
+    <div style="padding-top:12px;">
+        @foreach (var a in AreaList)
+        {
+            <div class="AreaDivSize hoverOutline" style="text-align:center;" @onclick="() => NavigateToArea(a.Id)">
+                <div>
+                    @if (a.Image == null)
+                    {
+                        <img class="iconImageSize" src="/images/d20Red.webp" alt="d20Red" asp-append-version="true" />
+                    }
+                    else
+                    {
+                        string img = SharedMethods.ConvertImageToDisplay(a.Image);
+                        <img class="iconImageSize" src="@img" alt="d20Red" asp-append-version="true" />
+                    }
+                </div>
+                <div style="margin-top:6px;">
+                    <b style="color:black;">@a.Name</b>
+                </div>
             </div>
-            <div style="margin-top:6px;">
-                <b style="color:black;">@a.Name</b>
+        }
+        @if (CanEdit)
+        {
+            <div class="AreaDivSize" hidden="@hideAddArea">
+                <Form Model="@areaModel">
+                    <div @onclick="() => AddImageShow()" class="campaignIcon">
+                        @if (areaModel.Image != null)
+                        {
+                            string img = ConvertImage(areaModel.Image);
+                            <img style="height:100%;width:100%" src="@img" alt="Chosen Image" asp-append-version="true" />
+                        }
+                        else
+                        {
+                            <img style="height:100%;width:100%" src="/images/plus.png" alt="Add Image" asp-append-version="true" />
+                        }
+                    </div>
+                    <div style="margin-left: auto; margin-right: auto; display:block;width:45%;align-content:center">
+                        <input type="text" @bind="@areaModel.Name" style="width:100% " />
+                    </div>
+
+                    <Button Variant="Primary" style="margin-left: auto; margin-right: auto;float:right" @onclick="() => SaveArea()">Create</Button>
+                    <Button Variant="Danger" style="margin-left: auto; margin-right: auto;float:right" @onclick="() => CancelAddNewArea()">Cancel</Button>
+                </Form>
+
             </div>
-        </div>
-    }
-    
-<div class="AreaDivSize" hidden="@hideAddArea">
-    <Form Model="@areaModel">
-        <div @onclick="() => AddImageShow()" class="campaignIcon">
-            @if (areaModel.Image != null)
-            {
-                string img = ConvertImage(areaModel.Image);
-                <img style="height:100%;width:100%" src="@img" alt="Chosen Image" asp-append-version="true" />
-            }
-            else
-            {
-                <img style="height:100%;width:100%" src="/images/plus.png" alt="Add Image" asp-append-version="true" />
-            }
-        </div>
-        <div style="margin-left: auto; margin-right: auto; display:block;width:45%;align-content:center">
-            <input type="text" @bind="@areaModel.Name" style="width:100% "/>
-        </div>
-        
-        <Button Variant="Primary" style="margin-left: auto; margin-right: auto;float:right" @onclick="()=>SaveArea()">Create</Button>
-        <Button Variant="Danger" style="margin-left: auto; margin-right: auto;float:right" @onclick="()=>CancelAddNewArea()">Cancel</Button>
-    </Form>
-
-</div>
+       
 
 
-    <div class="AreaDivSize hoverOutline" style="text-align:center;" @onclick="() => AddNewArea()" hidden="@hideNewAddArea">
-        <div>
-            <img class="imageSize" src="/images/plus.png" alt="plus" asp-append-version="true" />
+            <div class="AreaDivSize hoverOutline" style="text-align:center;" @onclick="() => AddNewArea()" hidden="@hideNewAddArea">
+                <div>
+                    <img class="imageSize" src="/images/plus.png" alt="plus" asp-append-version="true" />
+                </div>
+                <div style="margin-top:6px;">
+                    <b style="color:black;">Add new Area</b>
+                </div>
+            </div>
+        }
         </div>
-        <div style="margin-top:6px;">
-            <b style="color:black;">Add new Area</b>
-        </div>
-    </div>
-</div>
-
+       
 
 
 

@@ -1,36 +1,42 @@
 ﻿@page "/mycampaigns"
 @using Blazority
 
-<body>
-    <div style="width:100%;min-height:60px;border-bottom: 2px solid darkred;">
-        <div style="float:left;height:40px;width:90%;min-width:600px;">
-            <h1 style="font-weight:bold;margin:0 auto">My Campaigns</h1>
-        </div>
-        <div style="width:10%;float:left;">
-            <Button @onclick="() => NavigateToCreateCampaign()">Create Campaign</Button>
-        </div>
+<div style="width:100%;min-height:60px;border-bottom: 2px solid darkred;">
+    <div style="float:left;height:40px;width:90%;min-width:600px;">
+        <h1 style="font-weight:bold;margin:0 auto">My Campaigns</h1>
     </div>
+    <div style="width:10%;float:left;">
+        <Button @onclick="() => NavigateToCreateCampaign()">Create Campaign</Button>
+    </div>
+</div>
+<AuthorizeView>
+    <Authorized>
+        <body>
 
-    <div style="padding-top:12px;">
-        @foreach (var c in MyCampaignsList)
-        {
-            <div class="CampaignDivSize hoverOutline" style="text-align:center;" @onclick="() => NavigateToCampaignView(c.Id)">
-                <div>
-                    @if (c.Image == null)
-                    {
-                        <img class="imageSize" src="/images/d20Red.webp" alt="d20Red" asp-append-version="true" />
-                    }
-                    else
-                    {
-                        string img = SharedMethods.ConvertImageToDisplay(c.Image);
-                        <img class="imageSize" src="@img" alt="d20Red" asp-append-version="true" />
-                    }
-                </div>
-                <div style="margin-top:6px;">
-                    <b style="color:black;">@c.Name</b>
-                </div>
+            <div style="padding-top:12px;">
+                @foreach (var c in MyCampaignsList)
+                {
+                    <div class="CampaignDivSize hoverOutline" style="text-align:center;" @onclick="() => NavigateToCampaignView(c.Id)">
+                        <div>
+                            @if (c.Image == null)
+                            {
+                                <img class="imageSize" src="/images/d20Red.webp" alt="d20Red" asp-append-version="true" />
+                            }
+                            else
+                            {
+                                string img = SharedMethods.ConvertImageToDisplay(c.Image);
+                                <img class="imageSize" src="@img" alt="d20Red" asp-append-version="true" />
+                            }
+                        </div>
+                        <div style="margin-top:6px;">
+                            <b style="color:black;">@c.Name</b>
+                        </div>
+                    </div>
+                }
             </div>
-        }
-    </div>
-
-</body>
+        </body>
+    </Authorized>
+    <NotAuthorized>
+        You need to be logged in to view this page.
+    </NotAuthorized>
+</AuthorizeView>

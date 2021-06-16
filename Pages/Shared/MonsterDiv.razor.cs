@@ -30,6 +30,10 @@ namespace DMM.Pages.Shared
         [Inject]
         MonsterService monsterService { get; set; }
         [Inject]
+        TraitService traitService { get; set; }
+        [Inject]
+        MonsterActionService monsterActionService { get; set; }
+        [Inject]
         UserManager<IdentityUser> UserManager { get; set; }
         [Inject]
         HttpClient Http { get; set; }
@@ -738,7 +742,32 @@ namespace DMM.Pages.Shared
             toAdd.Challange = m.Challange;
             await monsterService.Insert(toAdd);
 
-            //Do stuff with Actions etc here!
+            foreach(var t in mItem.AbilityList)
+            {
+                Trait trait = new();
+                trait.MonsterID = toAdd.Id;
+                trait.Name = t.Name;
+                trait.Description = t.Description;
+                await traitService.Insert(trait);
+            }
+            foreach (var t in mItem.ActionList)
+            {
+                MonsterAction mAction = new();
+                mAction.MonsterID = toAdd.Id;
+                mAction.Name = t.Name;
+                mAction.Description = t.Description;
+                mAction.IsLegendary = false;
+                await monsterActionService.Insert(mAction);
+            }
+            foreach (var t in mItem.LegendaryActionList)
+            {
+                MonsterAction mAction = new();
+                mAction.MonsterID = toAdd.Id;
+                mAction.Name = t.Name;
+                mAction.Description = t.Description;
+                mAction.IsLegendary = true;
+                await monsterActionService.Insert(mAction);
+            }
         }
     }
     public class ActionModel

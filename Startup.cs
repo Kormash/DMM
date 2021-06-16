@@ -68,6 +68,8 @@ namespace DMM
             services.AddScoped<LocationService>();
             services.AddScoped<NoteService>();
             services.AddScoped<MapService>();
+            services.AddScoped<TraitService>();
+            services.AddScoped<MonsterActionService>();
 
             services.AddScoped<ActionTemplate>();
             services.AddScoped<Area>();

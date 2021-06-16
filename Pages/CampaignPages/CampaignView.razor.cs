@@ -93,7 +93,7 @@ namespace DMM.Pages.CampaignPages
             {
                 CanEdit = false;
             }
-
+            
             campaignModel.Name = Campaign.Name;
             campaignModel.Description = Campaign.Description;
             campaignModel.Image = Campaign.Image;

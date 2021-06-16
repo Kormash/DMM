@@ -29,6 +29,8 @@ namespace DMM.Pages.AreaPages
         [Inject]
         LocationService locationService { get; set; }
         [Inject]
+        CampaignService campaignService { get; set; }
+        [Inject]
         AreaService areaService { get; set; }
         [Inject]
         NoteService noteService { get; set; }
@@ -36,6 +38,14 @@ namespace DMM.Pages.AreaPages
         MapService mapService { get; set; }
         [Inject]
         MonsterService monsterService { get; set; }
+        [Inject]
+        TraitService traitService { get; set; }
+        [Inject]
+        MonsterActionService monsterActionService { get; set; }
+        [Inject]
+        UserManager<IdentityUser> UserManager { get; set; }
+        [Inject]
+        AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
         //Variables
         string Output = "Temp Text";
@@ -108,9 +118,12 @@ namespace DMM.Pages.AreaPages
         bool HideD6Count = true;
         bool HideD4Count = true;
 
+        bool CanEdit = false;
+
         DiceModel diceModel = new();
         public bool MonsterModal = false;
         List<MonsterObject> MonsterList = new();
+        Campaign campaign = new();
 
         [Parameter]
         public int AreaId { get; set; }
@@ -119,7 +132,22 @@ namespace DMM.Pages.AreaPages
         {
             LocationList = await locationService.GetLocationByAreaID(AreaId);
             area = await areaService.GetAreaByID(AreaId);
-            
+            campaign = await campaignService.GetCampaignByID(area.CampaignID);
+
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity.IsAuthenticated)
+            {
+                var currentUser = await UserManager.GetUserAsync(user);
+                if (currentUser.Id == campaign.UserId)
+                {
+                    CanEdit = true;
+                }
+            }
+            else
+            {
+                CanEdit = false;
+            }
 
         }
 
@@ -457,7 +485,21 @@ namespace DMM.Pages.AreaPages
             {
                 MonsterObject toAdd = new();
                 toAdd.Monster = m;
+                toAdd.AbilityList = await traitService.GetTraitsByMonsterId(m.Id);
+                var actionList = await monsterActionService.GetMonsterActionsByMonsterId(m.Id);
+                foreach(var a in actionList)
+                {
+                    if (a.IsLegendary)
+                    {
+                        toAdd.LegendaryActionList.Add(a);
+                    }
+                    else
+                    {
+                        toAdd.ActionList.Add(a);
+                    }
+                }
                 MonsterList.Add(toAdd);
+
             }
         }
         public void Back()
@@ -827,8 +869,8 @@ namespace DMM.Pages.AreaPages
     {
         public Monster Monster { get; set; }
         public bool hidden = true;
-        public List<ActionModel> AbilityList = new();
-        public List<ActionModel> ActionList = new();
-        public List<ActionModel> LegendaryActionList = new();
+        public List<Trait> AbilityList = new();
+        public List<MonsterAction> ActionList = new();
+        public List<MonsterAction> LegendaryActionList = new();
     }
 }
