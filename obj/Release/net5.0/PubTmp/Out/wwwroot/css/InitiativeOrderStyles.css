@@ -1,0 +1,93 @@
+﻿body {
+}
+
+.InitiativeWoodTray {
+    border: 3px solid black;
+    height: 250px;
+    width: 500px;
+    background-image: url(../images/diceTrayWood.png);
+    background-size: 101% 101%;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+    float: left;
+    margin-bottom:12px;
+}
+
+.InitiativeVelvetTray {
+    border: 3px solid black;
+    height: 200px;
+    margin-left: 6px;
+    margin-bottom: 6px;
+    background-image: url(../images/diceTrayRed.png);
+    background-size: 100% 100%;
+    float: left;
+    width: 400px;
+}
+
+.AddInitiativeTextArea {
+    height: 50px;
+    width: 70%;
+    float: left;
+    margin-left: 6px;
+}
+
+.InitiativeObject {
+    background-image: url(../images/SlateStone.png);
+    background-size: 100% 100%;
+    width: 90%;
+    height: 30px;
+    margin-left: 6px;
+    margin-top: 3px
+}
+
+.AddInitiative {
+    float: left;
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Icons/Add.png);
+}
+
+.SortInitiative {
+    width: 50px;
+    height: 30px;
+    background-size: 100% 100%;
+    margin-top:6px;
+    text-align: center;
+    border:2px solid black;
+    background-image: url(../images/SlateStone.png);
+}
+
+.NextInitiative {
+    width: 50px;
+    height: 30px;
+    background-size: 100% 100%;
+    margin-top: 6px;
+    text-align: center;
+    border: 2px solid black;
+    background-image: url(../images/SlateStone.png);
+}
+
+.ClearInitiative {
+    width: 50px;
+    height: 30px;
+    background-size: 100% 100%;
+    margin-top: 6px;
+    text-align: center;
+    border: 2px solid black;
+    background-image: url(../images/SlateStone.png);
+}
+
+.RemoveInitiative {
+    float: right;
+    width: 25px;
+    height: 25px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/cancel.png);
+}
+
+    .RemoveInitiative:hover {
+        background-image: url(../images/Dice/cancelHover.png);
+    }

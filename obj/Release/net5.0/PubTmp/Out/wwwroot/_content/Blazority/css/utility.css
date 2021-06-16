@@ -1,0 +1,9 @@
+﻿/**Hide a control*/
+.hide {
+    display: none;
+}
+
+/**Disable user selection*/
+user-select-none {
+    user-select: none !important;
+}

@@ -1,0 +1,26 @@
+﻿/**----Clarity enhancements---*/
+
+/*Bug fix: Disable style for radio buttons, same as checkboxes*/
+.clr-form-control-disabled .clr-radio-wrapper label::before {
+    background-color: #ccc;
+    background-color: var(--clr-forms-checkbox-disabled-background-color, #cccccc)
+}
+
+/*Bug fix: Focus with 100% width for input-group */
+.clr-input-group.clr-focus {
+    width: auto;
+}
+
+/*Bug fix: input group icon should be inside the input not make it wider */
+.clr-input-group {
+    position: relative;
+}
+
+.clr-input-group-icon-action {
+    position: absolute;
+    right: 0;
+}
+
+.clr-input-with-action {
+    max-width: calc(100% - 1.8rem) !important;
+}

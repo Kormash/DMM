@@ -1,0 +1,41 @@
+﻿/*NumberInput.razor*/
+.number-input-button {
+    line-height: 0.6rem !important;
+}
+
+    .number-input-button clr-icon {
+        height: 0.45rem !important;
+    }
+
+    .number-input-button.number-input-button-bottom {
+        bottom: 0;
+    }
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+
+/*PasswordInput.razor*/
+input::-ms-reveal,
+input::-ms-clear {
+    display: none;
+}
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+/* Disable the input action */
+.clr-input-group-icon-action:disabled {
+    color: #b3b3b3;
+    color: var(--clr-forms-text-disabled-color, #b3b3b3);
+    cursor: not-allowed;
+}

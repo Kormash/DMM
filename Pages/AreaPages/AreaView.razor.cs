@@ -343,7 +343,7 @@ namespace DMM.Pages.AreaPages
         {
             try
             {
-                HttpResponseMessage response = await Http.GetAsync($"https://localhost:44327/Dice/{diceNumber}/{diceType}");
+                HttpResponseMessage response = await Http.GetAsync($"http://dicerollerapi.azurewebsites.net/Dice/{diceNumber}/{diceType}");
                 response.EnsureSuccessStatusCode();
                 Output = await response.Content.ReadAsStringAsync();
                 // Above three lines can be replaced with new helper method below

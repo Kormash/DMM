@@ -1,0 +1,284 @@
+﻿body {
+}
+
+.scrollbar {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+    .scrollbar::-webkit-scrollbar {
+        width: 12px; /* width of the entire scrollbar */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* color of the tracking area */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+}
+
+.scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: #404040; /* color of the scroll thumb */
+    border-radius:20px; /* roundness of the scroll thumb */
+    border: 1px solid black;
+    opacity: 0.3;
+    }
+
+.woodTray {
+    border: 3px solid black;
+    height: 500px;
+    width: 500px;
+    background-size: 101% 101%;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+    float: left;
+}
+
+.velvetTray {
+    border: 3px solid black;
+    height: 400px;
+    margin-left: 6px;
+    margin-top: 6px;
+    background-size: 100% 100%;
+    float: left;
+    width: 400px;
+}
+
+.DiceText {
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 50px;
+    font-size: x-large;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+.d100Die {
+    background-image: url(../images/Dice/d20Die.png);
+    background-size: 100% 100%;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-left: 3px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+.d20Die {
+    background-image: url(../images/Dice/d20Die.png);
+    background-size: 100% 100%;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-left: 3px;
+    margin-top: 3px;
+    text-align:center;
+}
+
+.d12Die {
+    background-image: url(../images/Dice/d12Die.png);
+    background-size: 100% 100%;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-left: 3px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+.d10Die {
+    background-image: url(../images/Dice/d10Die.png);
+    background-size: 100% 100%;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-left: 3px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+.d8Die {
+    background-image: url(../images/Dice/d8Die.png);
+    background-size: 100% 100%;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-left: 3px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+.d6Die {
+    background-image: url(../images/Dice/d6Die.png);
+    background-size: 100% 100%;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-left: 3px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+.d4Die {
+    background-image: url(../images/Dice/d4Die.png);
+    background-size: 100% 100%;
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-left: 3px;
+    margin-top: 3px;
+    text-align: center;
+}
+
+.dieResultContainer {
+    float: left;
+    width: auto;
+    height: 100%;
+    margin-left: 12px;
+}
+
+.dieResult {
+    width: 50px;
+    height: 30px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.dieButtonContainer {
+    float: left;
+    width: 60px;
+    height: 100%;
+    margin-left: 12px;
+}
+
+.d20Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d20.png);
+    margin-top: 3px;
+}
+
+    .d20Button:hover {
+        background-image: url(../images/Dice/d20Hover.png);
+    }
+
+.d12Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d12.png);
+    margin-top: 3px;
+}
+
+    .d12Button:hover {
+        background-image: url(../images/Dice/d12Hover.png);
+    }
+
+.d10Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d10.png);
+    margin-top: 3px;
+}
+
+    .d10Button:hover {
+        background-image: url(../images/Dice/d10Hover.png);
+    }
+.d8Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d8.png);
+    margin-top: 3px;
+}
+
+    .d8Button:hover {
+        background-image: url(../images/Dice/d8Hover.png);
+    }
+
+.d6Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d6.png);
+    margin-top: 3px;
+}
+
+    .d6Button:hover {
+        background-image: url(../images/Dice/d6Hover.png);
+    }
+
+.d4Button {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/d4.png);
+    margin-top: 3px;
+}
+
+    .d4Button:hover {
+        background-image: url(../images/Dice/d4Hover.png);
+    }
+
+.rollButton {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/roll.png);
+    margin-top: 18px;
+}
+
+    .rollButton:hover {
+        background-image: url(../images/Dice/rollHover.png);
+    }
+
+.CancelButton {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    text-align: center;
+    background-image: url(../images/Dice/cancel.png);
+    margin-top: 45px;
+}
+
+.CancelButton:hover {
+    background-image: url(../images/Dice/cancelHover.png);
+}
+
+.CountCircleDie {
+    float: right;
+    width: 50%;
+    height: 50%;
+    background-size: 100% 100%;
+    background-image: url(../images/Dice/RoundBadge.png);
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

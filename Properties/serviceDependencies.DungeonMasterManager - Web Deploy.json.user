@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "signalr1": {
+      "restored": true,
+      "restoreTime": "2021-06-16T13:50:13.7072182Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2021-06-16T13:38:03.353271Z"
+    }
+  },
+  "parameters": {
+    "signalr1.resourceGroupName": {
+      "Name": "signalr1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "DefaultResourceGroup-NEU"
+    },
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "db4a84cd-171c-4e93-af19-c6a82703037e"
+    },
+    "signalr1.subscriptionId": {
+      "Name": "signalr1.subscriptionId",
+      "Type": "subscription",
+      "Value": "db4a84cd-171c-4e93-af19-c6a82703037e"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "RustaDatabase"
+    }
+  }
+}

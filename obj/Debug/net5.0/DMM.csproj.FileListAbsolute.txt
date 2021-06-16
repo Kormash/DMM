@@ -544,3 +544,5 @@ C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\AdminPages\PrivacyPo
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\Shared\PrivacyDropDown.razor.g.cs
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\Shared\MonsterDiv.razor.g.cs
 C:\Users\Erik\source\repos\DMM\obj\Debug\net5.0\Razor\Pages\Shared\MonsterDiv.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\RazorDeclaration\Pages\Shared\MonsterDiv.razor.g.cs
+D:\repos\DMM\obj\Debug\net5.0\Razor\Pages\Shared\MonsterDiv.razor.g.cs

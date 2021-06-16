@@ -1,0 +1,44 @@
+﻿/*Popover*/
+[blazority] [popover-host] {
+    position: relative;
+}
+
+[blazority] [popover] {
+    position: absolute;
+    z-index: 1;
+}
+
+[blazority].popover {
+    position: static;
+}
+    [blazority].popover > .popover-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        min-height: 100vh;
+        min-width: 100vw;
+        max-height: 100vh;
+        max-width: 100vw;
+        background: transparent;
+    }
+
+    [blazority].popover > .popover-body {
+        position: fixed;
+        top: 0;
+        right: initial;
+        left: 0;
+        bottom: initial;
+        z-index: 9999;
+        opacity: 0;
+    }
+
+    [blazority].popover > .popover-body.popover-inverted {
+        transform: scale(1, -1);
+    }
+
+        [blazority].popover > .popover-body.popover-inverted > .popover-content > * {
+            transform: scale(1, -1);
+        }
+

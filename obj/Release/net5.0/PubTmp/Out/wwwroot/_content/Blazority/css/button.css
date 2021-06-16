@@ -1,0 +1,21 @@
+﻿/**Buttons*/
+button[blazority].btn-state-host {
+    position: relative;
+}
+
+    button[blazority].btn-state-host .btn-content {
+        opacity: 0;
+    }
+
+button[blazority] .spinner[name=state-indicator] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+}
+
+button[blazority] .spinner-check[name=state-indicator] {
+    animation: grow 0.3s ease-in-out;
+}
